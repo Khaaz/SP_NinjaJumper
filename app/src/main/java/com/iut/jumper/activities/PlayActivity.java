@@ -1,59 +1,40 @@
 package com.iut.jumper.activities;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.iut.jumper.R;
+import com.iut.jumper.core.managers.SensorService;
+import com.iut.jumper.views.GameView;
 
-public class PlayActivity extends AppCompatActivity {
+public class PlayActivity extends AActivity {
 
+    SensorService sensorService;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d("JUMPER-Play", "onCreate");
+
+        this.sensorService = new SensorService(this);
+        this.sensorService.start();
+
+        //GameView gameView = new GameView(this);
+        //setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
+        //setContentView(gameView);
+
         setContentView(R.layout.activity_play);
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        Log.d("JUMPER-Play", "onStart");
+    protected void onPause() {
+        super.onPause();
+        this.sensorService.stop();
     }
 
     @Override
     protected void onResume() {
+        this.sensorService.start();
         super.onResume();
-        Log.d("JUMPER-Play", "onResume");
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Log.d("JUMPER-Play", "onRestart");
-    }
-
-    @Override
-    protected void onPause() {
-        Log.d("JUMPER-Play", "onPause");
-        super.onPause();
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        Log.d("JUMPER-Play", "onSaveInstanceState");
-        super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    protected void onStop() {
-        Log.d("JUMPER-Play", "onStop");
-        super.onStop();
-    }
-
-    @Override
-    protected void onDestroy() {
-        Log.d("JUMPER-Play", "onDestroy");
-        super.onDestroy();
     }
 }
