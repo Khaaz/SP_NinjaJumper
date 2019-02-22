@@ -11,16 +11,16 @@
     <Button
         android:id="@+id/playButton"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="323dp"
         android:layout_weight="1"
-        android:text="@string/playButton"
-        android:onClick="openPlay"/>
+        android:onClick="openPlay"
+        android:text="@string/playButton" />
 
     <Button
         android:id="@+id/scoreButton"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="292dp"
         android:layout_weight="1"
-        android:text="@string/scoreButton"
-        android:onClick="openScore" />
+        android:onClick="openScore"
+        android:text="@string/scoreButton" />
 </android.widget.LinearLayout>
