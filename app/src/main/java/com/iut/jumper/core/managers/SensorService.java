@@ -13,6 +13,11 @@ public class SensorService implements SensorEventListener {
 
     private SensorManager sensorManager;
     private Sensor sensor;
+
+    private double lastX = 0;
+    private final double delta = 0.5; // captor sensibility
+
+
     private Personnage perso = null;
     public Personnage getPerso() { return perso; }
 
@@ -33,24 +38,45 @@ public class SensorService implements SensorEventListener {
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        float x = event.values[0];
+        if (sensibility(event.values[0])) {
+            Log.d("JUMPER-SENSOR", "SENSIBLE"); // x
+            Log.d("JUMPER-SENSOR", String.valueOf(event.values[0])); // x
+            double acceleration = this.calculateAcceleration();
+            // update perso acceleration/movement value (Position manager handles position)
+        }
+        //this.lastX = event.values[0];
+        /*
         perso.setSpeedX(perso.getSpeedX() + x);
         if(perso.getSpeedX() > perso.Vit_Max){
             perso.setSpeedX(perso.Vit_Max);
         }
         float nposx = perso.getMyX() + perso.getSpeedX();
         perso.setMyX(nposx);
+
         if (event.values[0] > 0){
             Log.d("Dirx", "Gauche");
         }
         else{
             Log.d("Dirx", "Droite");
-        }
-        Log.d("Pos", String.valueOf(perso.getMyX()));
-        Log.d("Spd", String.valueOf(perso.getSpeedX()));
+        }*/
+
+        //Log.d("Pos", String.valueOf(perso.getMyX()));
+        //Log.d("Spd", String.valueOf(perso.getSpeedX()));
         //Log.d("JUMPER-SENSOR", String.valueOf(event.values[0])); // x
         //Log.d("JUMPER-SENSOR", String.valueOf(event.values[1])); // y
         //Log.d("JUMPER-SENSOR", String.valueOf(event.values[2])); // z
+    }
+
+    private boolean sensibility(double curX) {
+        if (Math.abs(this.lastX - curX) > delta) {
+            this.lastX = curX;
+            return true;
+        }
+        return false;
+    }
+
+    private double calculateAcceleration() {
+        return 0;
     }
 
     @Override

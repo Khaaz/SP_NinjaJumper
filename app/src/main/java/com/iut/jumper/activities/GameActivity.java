@@ -8,7 +8,7 @@ import com.iut.jumper.R;
 import com.iut.jumper.core.managers.SensorService;
 import com.iut.jumper.views.GameView;
 
-public class PlayActivity extends AActivity {
+public class GameActivity extends AActivity {
 
     SensorService sensorService;
     @Override
@@ -17,7 +17,7 @@ public class PlayActivity extends AActivity {
         Log.d("JUMPER-Play", "onCreate");
 
         this.sensorService = new SensorService(this);
-        this.sensorService.start();
+        //this.sensorService.start(); // called in onResume
 
         //GameView gameView = new GameView(this);
         //setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
