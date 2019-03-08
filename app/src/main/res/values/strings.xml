@@ -4,4 +4,7 @@
     <string name="scoreButton">Score</string>
     <string name="scores">Scores</string>
     <string name="PlayView">PlayView</string>
+    <string name="options">Options</string>
+    <string name="music">Musique : </string>
+    <string name="hardmode">Mode difficile : </string>
 </resources>

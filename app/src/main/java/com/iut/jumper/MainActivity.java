@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.iut.jumper.activities.AActivity;
 import com.iut.jumper.activities.GameActivity;
+import com.iut.jumper.activities.OptionsActivity;
 import com.iut.jumper.activities.ScoreActivity;
 
 public class MainActivity extends AActivity {
@@ -28,6 +29,12 @@ public class MainActivity extends AActivity {
     public void openPlay(View view) {
         Log.d("JUMPER", "openPlay");
         Intent intent = new Intent(this, GameActivity.class);
+        startActivity(intent);
+    }
+
+    public void openOptions(View view){
+        Log.d("JUMPER","openOptions");
+        Intent intent = new Intent(this, OptionsActivity.class);
         startActivity(intent);
     }
 }
