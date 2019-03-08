@@ -1,40 +1,58 @@
 package com.iut.jumper.activities;
 
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.iut.jumper.R;
-import com.iut.jumper.core.managers.SensorService;
-import com.iut.jumper.views.GameView;
+import com.iut.jumper.core.managers.GameManager;
 
 public class GameActivity extends AActivity {
 
-    SensorService sensorService;
+
+    private GameManager gameManager;
+    private boolean paused;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d("JUMPER-Play", "onCreate");
 
-        this.sensorService = new SensorService(this);
-        //this.sensorService.start(); // called in onResume
+        this.paused = false;
+        this.gameManager = new GameManager(this);
+        this.gameManager.start();
 
-        //GameView gameView = new GameView(this);
-        //setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
-        //setContentView(gameView);
-
-        setContentView(R.layout.activity_play);
+        setContentView(R.layout.activity_game);
     }
 
     @Override
     protected void onPause() {
+        this.paused = true;
         super.onPause();
-        this.sensorService.stop();
+        this.gameManager.pause();
     }
 
     @Override
     protected void onResume() {
-        this.sensorService.start();
+        this.paused = false;
+        this.gameManager.resume();
         super.onResume();
+    }
+
+    @Override
+    protected void onStop() {
+        this.paused = false;
+        this.gameManager.stop();
+        super.onStop();
+    }
+
+    public void pauseButton(View view) {
+        if (this.paused) {
+            this.paused = false;
+            this.gameManager.resume();
+        } else {
+            this.paused = true;
+            this.gameManager.pause();
+        }
     }
 }

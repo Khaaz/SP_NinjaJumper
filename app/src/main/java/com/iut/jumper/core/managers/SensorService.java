@@ -8,6 +8,7 @@ import android.hardware.SensorManager;
 import android.util.Log;
 
 import com.iut.jumper.models.Personnage;
+import com.iut.jumper.utils.Constants;
 
 public class SensorService implements SensorEventListener {
 
@@ -15,7 +16,7 @@ public class SensorService implements SensorEventListener {
     private Sensor sensor;
 
     private double lastX = 0;
-    private final double delta = 0.5; // captor sensibility
+    private final double delta = Constants.SENSOR_SENSIBILITY; // captor sensibility
 
 
     private Personnage perso = null;
