@@ -1,20 +1,19 @@
 package com.iut.jumper.views;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
 import com.iut.jumper.R;
+import com.iut.jumper.activities.GameActivity;
 
 public class GameView extends View {
 
-    private Paint painter;
     private Bitmap perso;
 
     public GameView(Context context) {
@@ -25,8 +24,9 @@ public class GameView extends View {
     public GameView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         Log.d("View", "constructor 2");
-        this.painter = new Paint(Paint.ANTI_ALIAS_FLAG);
-        // create bitmap
+        perso = BitmapFactory.decodeResource(getResources(), R.drawable.doodle);
+
+        GameActivity activity = (GameActivity)context;
 
     }
 
@@ -39,6 +39,7 @@ public class GameView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        //canvas.drawBitmap(this.perso, 0, 0, this.painter);
+        canvas.drawBitmap(this.perso, 0, 0, null);
+        canvas.drawBitmap(this.perso, 500, 500, null);
     }
 }

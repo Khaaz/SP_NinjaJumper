@@ -13,6 +13,8 @@ public class GameActivity extends AActivity {
     private GameManager gameManager;
     private boolean paused;
 
+    public boolean test = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

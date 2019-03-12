@@ -47,7 +47,6 @@ public class Joueur {
 
     @Override
     public String toString() {
-        return "Joueur : " + username + "\n" +
-                "Score   : " + score;
+        return "Joueur : " + username + "\nScore   : " + score;
     }
 }
