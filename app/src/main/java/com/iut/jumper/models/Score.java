@@ -1,21 +1,23 @@
 package com.iut.jumper.models;
 
+import android.support.annotation.NonNull;
+
 import java.io.Serializable;
 
-public class Joueur {
+public class Score implements Comparable<Score> {
 
     private String username;
     private Integer score;
 
     private boolean active;
 
-    public Joueur(String username, Integer score, boolean active) {
+    public Score(String username, Integer score, boolean active) {
         this.username = username;
         this.score = score;
         this.active = active;
     }
 
-    public Joueur(String username, Integer score) {
+    public Score(String username, Integer score) {
         this.username = username;
         this.score = score;
         this.active = true;
@@ -47,6 +49,11 @@ public class Joueur {
 
     @Override
     public String toString() {
-        return "Joueur : " + username + "\nScore   : " + score;
+        return "Score : " + username + "\nScore   : " + score;
+    }
+
+    @Override
+    public int compareTo(@NonNull Score s) {
+        return (this.score < s.score) ? 1 : ((this.score == s.score) ? 0 : -1);
     }
 }

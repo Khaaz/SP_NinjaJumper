@@ -6,7 +6,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.iut.jumper.R;
-import com.iut.jumper.models.Joueur;
+import com.iut.jumper.models.Score;
+
+import java.util.Arrays;
 
 import static com.iut.jumper.R.layout.activity_scores;
 
@@ -20,14 +22,15 @@ public class ScoreActivity extends AActivity {
 
         ListView scores = (ListView)findViewById(R.id.scores);
 
-        Joueur clem = new Joueur("clement", 350214);
+        Score clem = new Score("clement", 350214);
         System.out.println(clem.toString());
-        Joueur lulu = new Joueur("lucas", 88);
-        Joueur theo = new Joueur("theo", 846486, false);
+        Score lulu = new Score("lucas", 88);
+        Score theo = new Score("theo", 846486, false);
 
-        Joueur[] joueurs = new Joueur[]{clem, theo, lulu};
+        Score[] lscores = new Score[]{clem, theo, lulu};
+        Arrays.sort(lscores);
 
-        ArrayAdapter<Joueur> arrayAdapter = new ArrayAdapter<Joueur>(this, android.R.layout.simple_list_item_1, joueurs);
+        ArrayAdapter<Score> arrayAdapter = new ArrayAdapter<Score>(this, android.R.layout.simple_list_item_1, lscores);
 
         scores.setAdapter(arrayAdapter);
     }
