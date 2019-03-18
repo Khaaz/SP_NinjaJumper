@@ -5,56 +5,75 @@ import android.util.Log;
 import android.view.View;
 
 import com.iut.jumper.R;
-import com.iut.jumper.core.managers.GameManager;
+import com.iut.jumper.core.managers.GameService;
+import com.iut.jumper.views.GameView;
 
 public class GameActivity extends AActivity {
 
-
-    private GameManager gameManager;
+    private GameService gameService;
     private boolean paused;
-
-    public boolean test = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d("JUMPER-Play", "onCreate");
 
-        this.paused = false;
-        this.gameManager = new GameManager(this);
-        this.gameManager.start();
-
         setContentView(R.layout.activity_game);
+
+        GameView gameView = findViewById(R.id.gameView);
+        this.gameService = new GameService(this, gameView);
+    }
+
+    public GameService getGameService() {
+        return gameService;
+    }
+
+    @Override
+    protected void onStart() {
+        this.paused = false;
+        this.gameService.start();
+        super.onStart();
     }
 
     @Override
     protected void onPause() {
-        this.paused = true;
         super.onPause();
-        this.gameManager.pause();
+        if (!this.paused) {
+            this.paused = true;
+            this.gameService.pause();
+        }
     }
 
     @Override
     protected void onResume() {
-        this.paused = false;
-        this.gameManager.resume();
+        if (this.paused) {
+            this.paused = false;
+            this.gameService.resume();
+        }
         super.onResume();
     }
 
     @Override
     protected void onStop() {
-        this.paused = false;
-        this.gameManager.stop();
+        this.gameService.stop();
+        // SAVE GAMEMANAGER STATE
         super.onStop();
+    }
+
+
+    @Override
+    protected void onRestart() {
+        // RESTORE GAMEMANAGER (instances + points etc)
+        super.onRestart();
     }
 
     public void pauseButton(View view) {
         if (this.paused) {
             this.paused = false;
-            this.gameManager.resume();
+            this.gameService.resume();
         } else {
             this.paused = true;
-            this.gameManager.pause();
+            this.gameService.pause();
         }
     }
 }

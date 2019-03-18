@@ -11,22 +11,30 @@ import android.view.View;
 
 import com.iut.jumper.R;
 import com.iut.jumper.activities.GameActivity;
+import com.iut.jumper.core.managers.InstanceManager;
+import com.iut.jumper.interfaces.IUpdatable;
 
 public class GameView extends View {
 
-    private Bitmap perso;
+    private InstanceManager instanceManager;
+
+    private Bitmap jumper;
+
+    private static final Object sFrameLock = new Object();
 
     public GameView(Context context) {
         super(context);
         Log.d("View", "constructor 1");
     }
 
+
     public GameView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         Log.d("View", "constructor 2");
-        perso = BitmapFactory.decodeResource(getResources(), R.drawable.doodle);
 
-        GameActivity activity = (GameActivity)context;
+        this.instanceManager = ((GameActivity)context).getGameService().getInstanceManager();
+
+        this.jumper = BitmapFactory.decodeResource(getResources(), this.instanceManager.getJumper().getSkin());
 
     }
 
@@ -37,9 +45,10 @@ public class GameView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
 
-        canvas.drawBitmap(this.perso, 0, 0, null);
-        canvas.drawBitmap(this.perso, 500, 500, null);
+        synchronized (sFrameLock) {
+            Log.d("GAMEVIEW", "ONDRAW");
+            canvas.drawBitmap(this.jumper, 0, 0, null);
+        }
     }
 }

@@ -39,6 +39,12 @@ public class AActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        Log.d(logTag, "onRestoreInstanceState");
+        super.onRestoreInstanceState(savedInstanceState);
+    }
+
+    @Override
     protected void onStop() {
         Log.d(logTag, "onStop");
         super.onStop();

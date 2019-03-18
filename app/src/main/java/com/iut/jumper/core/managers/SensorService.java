@@ -7,24 +7,22 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.util.Log;
 
-import com.iut.jumper.models.Personnage;
 import com.iut.jumper.utils.Constants;
 
 public class SensorService implements SensorEventListener {
 
-    private SensorManager sensorManager;
-    private Sensor sensor;
+    private final SensorManager sensorManager;
+    private final Sensor sensor;
 
-    private double lastX = 0;
+    private final GameService gameService;
+
     private final double delta = Constants.SENSOR_SENSIBILITY; // captor sensibility
 
+    private double lastX = 0;
 
-    private Personnage perso = null;
-    public Personnage getPerso() { return perso; }
+     public SensorService(Context context, GameService gameService) {
+        this.gameService = gameService;
 
-    public void setPerso(Personnage pperso) { this.perso = pperso; }
-
-    public SensorService(Context context) {
         sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
     }
@@ -44,6 +42,7 @@ public class SensorService implements SensorEventListener {
             Log.d("JUMPER-SENSOR", String.valueOf(event.values[0])); // x
             double acceleration = this.calculateAcceleration();
             // update perso acceleration/movement value (Position manager handles position)
+            this.gameService.getPositionManager().updateJumperSpeed();
         }
         //this.lastX = event.values[0];
         /*
