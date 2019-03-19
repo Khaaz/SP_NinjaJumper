@@ -2,6 +2,7 @@ package com.iut.jumper.activities;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 
 import com.iut.jumper.R;
@@ -18,7 +19,9 @@ public class GameActivity extends AActivity {
         super.onCreate(savedInstanceState);
         Log.d("JUMPER-Play", "onCreate");
 
-        this.gameService = new GameService(this);
+        Display display = getWindowManager().getDefaultDisplay();
+
+        this.gameService = new GameService(this, display);
 
         setContentView(R.layout.activity_game);
 

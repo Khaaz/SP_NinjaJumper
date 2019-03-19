@@ -12,7 +12,7 @@ import android.view.View;
 import com.iut.jumper.R;
 import com.iut.jumper.activities.GameActivity;
 import com.iut.jumper.core.managers.InstanceManager;
-import com.iut.jumper.interfaces.IUpdatable;
+import com.iut.jumper.models.Jumper;
 
 public class GameView extends View {
 
@@ -34,7 +34,9 @@ public class GameView extends View {
 
         this.instanceManager = ((GameActivity)context).getGameService().getInstanceManager();
 
-        this.jumper = BitmapFactory.decodeResource(getResources(), this.instanceManager.getJumper().getSkin());
+        Jumper ijumper = this.instanceManager.getJumper();
+        Bitmap bjumper = BitmapFactory.decodeResource(getResources(), ijumper.getSkin());
+        this.jumper = Bitmap.createScaledBitmap(bjumper, ijumper.getWidth(), ijumper.getHeight(), true);
 
     }
 
@@ -48,7 +50,7 @@ public class GameView extends View {
 
         synchronized (sFrameLock) {
             Log.d("GAMEVIEW", "ONDRAW");
-            canvas.drawBitmap(this.jumper, 0, 0, null);
+            canvas.drawBitmap(this.jumper, (int)this.instanceManager.getJumper().getPosX(), (int)this.instanceManager.getJumper().getPosY(), null);
         }
     }
 }

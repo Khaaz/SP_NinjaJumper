@@ -42,7 +42,7 @@ public class SensorService implements SensorEventListener {
             Log.d("JUMPER-SENSOR", String.valueOf(event.values[0])); // x
             double acceleration = this.calculateAcceleration();
             // update perso acceleration/movement value (Position manager handles position)
-            this.gameService.getPositionManager().updateJumperSpeed();
+            this.gameService.getPositionManager().updateJumperSpeed(acceleration);
         }
         //this.lastX = event.values[0];
         /*
@@ -76,7 +76,7 @@ public class SensorService implements SensorEventListener {
     }
 
     private double calculateAcceleration() {
-        return 0;
+        return this.lastX;
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.iut.jumper.core.managers;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.Display;
 
 import com.iut.jumper.core.managers.GameLoopManager.GameLoopService;
 import com.iut.jumper.interfaces.IService;
@@ -18,10 +19,10 @@ public class GameService implements IService {
 
 
     // CREATE - INSTANTIATE elements
-    public GameService(Context context) {
+    public GameService(Context context, Display display) {
         Log.d("GAMEMANAGER", "create)");
 
-        this.instanceManager = new InstanceManager();
+        this.instanceManager = new InstanceManager(display);
         this.collisionManager = new CollisionManager();
         this.positionManager = new PositionManager(this);
 

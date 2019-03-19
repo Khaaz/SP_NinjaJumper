@@ -19,9 +19,12 @@ public class PositionManager implements IUpdatable {
 
     public void update() {
         Log.d("POSITION-MANAGER", "update)");
+        this.instanceManager.getJumper().setPosX(this.instanceManager.getJumper().getPosX() - 10*this.instanceManager.getJumper().getSpeed());
+        Log.d("POSITIONMANAGER", String.valueOf(this.instanceManager.getJumper().getPosX()));
     }
 
-    public void updateJumperSpeed() {
-
+    public void updateJumperSpeed(double speed) {
+        //Log.d("POSITIONMANAGER", String.valueOf(speed));
+        this.instanceManager.getJumper().setSpeed(speed);
     }
 }

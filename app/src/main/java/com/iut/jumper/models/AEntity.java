@@ -2,30 +2,35 @@ package com.iut.jumper.models;
 
 public abstract class AEntity {
 
-    private double x;
-    private double y;
+    private double posX;
+    private double posY;
     private double speed;
 
-    private int skin;
+    private final int width;
+    private final int height;
 
-    public AEntity(int skin) {
+    private final int skin;
+
+    public AEntity(int skin, int width, int height) {
         this.skin = skin;
+        this.width = width;
+        this.height = height;
     }
 
-    public double getY() {
-        return y;
+    public double getPosY() {
+        return posY;
     }
 
-    public void setY(double y) {
-        this.y = y;
+    public void setPosY(double posY) {
+        this.posY = posY;
     }
 
-    public double getX() {
-        return x;
+    public double getPosX() {
+        return posX;
     }
 
-    public void setX(double x) {
-        this.x = x;
+    public void setPosX(double posX) {
+        this.posX = posX;
     }
 
     public double getSpeed() {
@@ -38,5 +43,13 @@ public abstract class AEntity {
 
     public int getSkin() {
         return skin;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
     }
 }
