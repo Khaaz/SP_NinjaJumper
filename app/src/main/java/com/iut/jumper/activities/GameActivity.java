@@ -18,10 +18,12 @@ public class GameActivity extends AActivity {
         super.onCreate(savedInstanceState);
         Log.d("JUMPER-Play", "onCreate");
 
+        this.gameService = new GameService(this);
+
         setContentView(R.layout.activity_game);
 
         GameView gameView = findViewById(R.id.gameView);
-        this.gameService = new GameService(this, gameView);
+        this.gameService.startGameloop(gameView);
     }
 
     public GameService getGameService() {

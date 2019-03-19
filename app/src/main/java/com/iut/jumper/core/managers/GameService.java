@@ -10,7 +10,7 @@ import com.iut.jumper.views.GameView;
 public class GameService implements IService {
 
     private final SensorService sensorService;
-    private final GameLoopService gameLoopService;
+    private GameLoopService gameLoopService;
 
     private final InstanceManager instanceManager;
     private final PositionManager positionManager;
@@ -18,7 +18,7 @@ public class GameService implements IService {
 
 
     // CREATE - INSTANTIATE elements
-    public GameService(Context context, GameView gameView) {
+    public GameService(Context context) {
         Log.d("GAMEMANAGER", "create)");
 
         this.instanceManager = new InstanceManager();
@@ -26,7 +26,6 @@ public class GameService implements IService {
         this.positionManager = new PositionManager(this);
 
         this.sensorService = new SensorService(context, this);
-        this.gameLoopService = new GameLoopService(this, gameView);
     }
 
     public InstanceManager getInstanceManager() {
@@ -41,6 +40,9 @@ public class GameService implements IService {
         return positionManager;
     }
 
+    public void startGameloop(GameView gameView) {
+        this.gameLoopService = new GameLoopService(this, gameView);
+    }
 
     // START ELEMENTS
     @Override

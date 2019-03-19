@@ -19,7 +19,6 @@ public class GameLoopService implements IService {
         this.start();
     }
 
-
     @Override
     public void start() {
         this.gameLoopTask.start();
