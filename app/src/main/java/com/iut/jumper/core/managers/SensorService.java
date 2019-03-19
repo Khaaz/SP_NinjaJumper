@@ -37,46 +37,31 @@ public class SensorService implements SensorEventListener {
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        if (sensibility(event.values[0])) {
+
+         double curX = event.values[0];
+
+        if (sensibility(curX)) {
             Log.d("JUMPER-SENSOR", "SENSIBLE"); // x
             Log.d("JUMPER-SENSOR", String.valueOf(event.values[0])); // x
+
+            this.gameService.getPositionManager().updateJumperDirection(curX > this.lastX);
+            this.lastX = curX;
+
             double acceleration = this.calculateAcceleration();
-            // update perso acceleration/movement value (Position manager handles position)
             this.gameService.getPositionManager().updateJumperSpeed(acceleration);
         }
-        //this.lastX = event.values[0];
-        /*
-        perso.setSpeedX(perso.getSpeedX() + x);
-        if(perso.getSpeedX() > perso.Vit_Max){
-            perso.setSpeedX(perso.Vit_Max);
-        }
-        float nposx = perso.getMyX() + perso.getSpeedX();
-        perso.setMyX(nposx);
 
-        if (event.values[0] > 0){
-            Log.d("Dirx", "Gauche");
-        }
-        else{
-            Log.d("Dirx", "Droite");
-        }*/
-
-        //Log.d("Pos", String.valueOf(perso.getMyX()));
-        //Log.d("Spd", String.valueOf(perso.getSpeedX()));
         //Log.d("JUMPER-SENSOR", String.valueOf(event.values[0])); // x
         //Log.d("JUMPER-SENSOR", String.valueOf(event.values[1])); // y
         //Log.d("JUMPER-SENSOR", String.valueOf(event.values[2])); // z
     }
 
     private boolean sensibility(double curX) {
-        if (Math.abs(this.lastX - curX) > delta) {
-            this.lastX = curX;
-            return true;
-        }
-        return false;
+        return Math.abs(this.lastX - curX) > delta;
     }
 
     private double calculateAcceleration() {
-        return this.lastX;
+        return -Constants.SENSOR_TO_SPEED_MULTIPLIER * this.lastX;
     }
 
     @Override

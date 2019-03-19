@@ -65,7 +65,6 @@ public class GameLoopTask implements Runnable {
     }
 
     private void execute() {
-        Log.d("GAMELOOP", "beep");
         this.gameService.getPositionManager().update();
         this.gameView.postInvalidate();
     }

@@ -49,7 +49,6 @@ public class GameView extends View {
     protected void onDraw(Canvas canvas) {
 
         synchronized (sFrameLock) {
-            Log.d("GAMEVIEW", "ONDRAW");
             canvas.drawBitmap(this.jumper, (int)this.instanceManager.getJumper().getPosX(), (int)this.instanceManager.getJumper().getPosY(), null);
         }
     }

@@ -15,15 +15,16 @@ public class GameService implements IService {
 
     private final InstanceManager instanceManager;
     private final PositionManager positionManager;
-    private final CollisionManager collisionManager;
+
+    private final Display display;
 
 
     // CREATE - INSTANTIATE elements
     public GameService(Context context, Display display) {
         Log.d("GAMEMANAGER", "create)");
 
-        this.instanceManager = new InstanceManager(display);
-        this.collisionManager = new CollisionManager();
+        this.display = display;
+        this.instanceManager = new InstanceManager(this);
         this.positionManager = new PositionManager(this);
 
         this.sensorService = new SensorService(context, this);
@@ -33,12 +34,12 @@ public class GameService implements IService {
         return instanceManager;
     }
 
-    public CollisionManager getCollisionManager() {
-        return collisionManager;
-    }
-
     public PositionManager getPositionManager() {
         return positionManager;
+    }
+
+    public Display getDisplay() {
+        return display;
     }
 
     public void startGameloop(GameView gameView) {
