@@ -58,25 +58,25 @@
         app:layout_constraintTop_toBottomOf="@+id/difficulty">
 
         <RadioButton
-            android:id="@+id/skinBase"
+            android:id="@+id/skinblanc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Base" />
+            android:text="@string/blanc" />
 
         <RadioButton
-            android:id="@+id/skinMomie"
+            android:id="@+id/skinviolet"
             android:layout_width="match_parent"
             android:layout_height="59dp"
             android:layout_weight="1"
-            android:text="Momie" />
+            android:text="@string/violet" />
 
         <RadioButton
-            android:id="@+id/skinNoel"
+            android:id="@+id/skinrouge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Noël" />
+            android:text="@string/rouge" />
 
     </RadioGroup>
 
@@ -96,7 +96,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:contentDescription="skinBase"
-            app:srcCompat="@drawable/doodle" />
+            app:srcCompat="@drawable/ninjablanc" />
 
         <ImageView
             android:id="@+id/imageView3"
@@ -104,7 +104,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:contentDescription="skinMomie"
-            app:srcCompat="@drawable/momie" />
+            app:srcCompat="@drawable/ninjaviolet" />
 
         <ImageView
             android:id="@+id/imageView4"
@@ -112,7 +112,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:contentDescription="skinNoel"
-            app:srcCompat="@drawable/noel" />
+            app:srcCompat="@drawable/ninjarouge" />
     </RadioGroup>
 
 </android.support.constraint.ConstraintLayout>
