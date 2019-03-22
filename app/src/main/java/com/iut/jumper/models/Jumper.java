@@ -9,6 +9,7 @@ public class Jumper extends AEntity {
     private final double jumpSpeed;
     private double jumpMultiplier;
 
+    private boolean jumpDirection; // true = jumpe up | false = jump down
     private boolean direction; // true = move right | false = moveLeft
 
     public Jumper(int width, int height) {
@@ -17,7 +18,9 @@ public class Jumper extends AEntity {
         this.jumpSpeed = Constants.JUMP_SPEED;
         this.jumpHeight = Constants.JUMP_HEIGHT;
         this.jumpMultiplier = 0;
+
         this.direction = true;
+        this.jumpDirection = true;
     }
 
     public double getJumpHeight() {
@@ -38,5 +41,13 @@ public class Jumper extends AEntity {
 
     public void setDirection(boolean direction) {
         this.direction = direction;
+    }
+
+    public boolean getJumpDirection() {
+        return jumpDirection;
+    }
+
+    public void setJumpDirection(boolean jumpDirection) {
+        this.jumpDirection = jumpDirection;
     }
 }

@@ -44,11 +44,12 @@ public class SensorService implements SensorEventListener {
             Log.d("JUMPER-SENSOR", "SENSIBLE"); // x
             Log.d("JUMPER-SENSOR", String.valueOf(event.values[0])); // x
 
-            this.gameService.getPositionManager().updateJumperDirection(curX > this.lastX);
-            this.lastX = curX;
+            this.gameService.getPositionManager().updateJumperDirection(curX < 0);
 
-            double acceleration = this.calculateAcceleration();
+            double acceleration = this.calculateAcceleration(curX);
             this.gameService.getPositionManager().updateJumperSpeed(acceleration);
+
+            this.lastX = curX;
         }
 
         //Log.d("JUMPER-SENSOR", String.valueOf(event.values[0])); // x
@@ -60,8 +61,8 @@ public class SensorService implements SensorEventListener {
         return Math.abs(this.lastX - curX) > delta;
     }
 
-    private double calculateAcceleration() {
-        return -Constants.SENSOR_TO_SPEED_MULTIPLIER * this.lastX;
+    private double calculateAcceleration(double curX) {
+        return Math.abs(Constants.SENSOR_TO_SPEED_MULTIPLIER * curX);
     }
 
     @Override

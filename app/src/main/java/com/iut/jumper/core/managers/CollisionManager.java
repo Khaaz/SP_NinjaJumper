@@ -47,4 +47,10 @@ public class CollisionManager {
                 Positioner.getYTop(a) > screenHeight
         );
     }
+
+    public static boolean isJumperAtMiddleScreen(AEntity a, int screenHeight) {
+        return (
+                Positioner.getYCenter(a) >= (screenHeight/2)
+        );
+    }
 }

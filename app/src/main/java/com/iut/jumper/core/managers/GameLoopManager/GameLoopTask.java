@@ -3,6 +3,7 @@ package com.iut.jumper.core.managers.GameLoopManager;
 import android.util.Log;
 
 import com.iut.jumper.core.managers.GameService;
+import com.iut.jumper.utils.Constants;
 import com.iut.jumper.views.GameView;
 
 import java.util.concurrent.ScheduledExecutorService;
@@ -26,7 +27,7 @@ public class GameLoopTask implements Runnable {
 
         this.gameView = gameView;
 
-        this.interval = 16;
+        this.interval = Constants.FRAME_REFRESH_INTERVAL;
         this.unit = TimeUnit.MILLISECONDS;
         this.running = false;
     }
