@@ -7,4 +7,9 @@
     <string name="options">Options</string>
     <string name="music">Musique : </string>
     <string name="hardmode">Mode difficile : </string>
+    <string name="blanc">Skin Blanc</string>
+    <string name="rouge">Skin Rouge</string>
+    <string name="violet">Skin Violet</string>
+
+
 </resources>

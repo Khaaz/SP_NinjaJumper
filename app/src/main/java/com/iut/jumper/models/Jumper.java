@@ -1,6 +1,7 @@
 package com.iut.jumper.models;
 
 import com.iut.jumper.R;
+import com.iut.jumper.activities.OptionsActivity;
 import com.iut.jumper.utils.Constants;
 
 public class Jumper extends AEntity {
@@ -12,7 +13,7 @@ public class Jumper extends AEntity {
     private boolean direction; // true = move right | false = moveLeft
 
     public Jumper(int width, int height) {
-        super(R.drawable.ninja, width, height);
+        super(OptionsActivity.skinChecked(), width, height);
 
         this.jumpSpeed = Constants.JUMP_SPEED;
         this.jumpHeight = Constants.JUMP_HEIGHT;

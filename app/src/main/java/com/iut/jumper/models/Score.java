@@ -49,11 +49,15 @@ public class Score implements Comparable<Score> {
 
     @Override
     public String toString() {
-        return "Score : " + username + "\nScore   : " + score;
+        return "Pseudo : " + username + "\nScore   : " + score;
     }
+
+    public String toString2() { return username + ";" + score; }
 
     @Override
     public int compareTo(@NonNull Score s) {
         return (this.score < s.score) ? 1 : ((this.score == s.score) ? 0 : -1);
     }
+
+
 }
