@@ -32,6 +32,7 @@ public class InstanceManager {
         this.jumper = new Jumper(R.drawable.ninjablanc_right, (int)Math.round(this.screenWidth * Constants.SCALE_JUMPER_WIDTH), (int)Math.round(this.screenWidth * Constants.SCALE_JUMPER_HEIGHT), 0, 0, this.screenHeight * Constants.SCALE_JUMPER_JUMP);
 
         Positioner.setYBottom(this.jumper, this.screenHeight);
+        Positioner.setXMiddle(this.jumper, this.screenWidth / 2);
     }
 
     public Jumper getJumper() {

@@ -20,6 +20,9 @@ public class PositionManager implements IUpdatable {
 
     private double currentJumpHeight;
 
+    private int minY;
+    private int maxY;
+
 
     public PositionManager(GameService gameService) {
         this.gameService = gameService;
@@ -29,6 +32,10 @@ public class PositionManager implements IUpdatable {
         this.display = this.gameService.getDisplay();
 
         this.currentJumpHeight = 0;
+
+        double jumpHeight = this.instanceManager.getJumper().getJumpHeight();
+        this.minY = (int)Math.round(jumpHeight * Constants.STARTING_MIN_Y_MULTIPLIER);
+        this.maxY = (int)Math.round(jumpHeight * Constants.STARTING_MAX_Y_MULTIPLIER);
 
         this.initPlateforms();
     }
@@ -40,13 +47,14 @@ public class PositionManager implements IUpdatable {
     }
 
     private void initPlateforms() {
-        int minY = 10;
-        int maxY = (int)Math.round(this.instanceManager.getJumper().getJumpHeight());
         double totalHeight = this.display.getHeight();
+
+        totalHeight -= (Constants.STARTING_X_PERCENTAGE * totalHeight);
+        this.instanceManager.addPlateform(this.display.getWidth() / 2, totalHeight);
 
         Random r = new Random();
         while (totalHeight > 0) {
-            double y = r.nextInt(maxY - minY) + minY;
+            double y = r.nextInt(this.maxY - this.minY) + this.minY;
             double x = r.nextInt(this.display.getWidth());
 
             totalHeight -= y;
@@ -59,11 +67,8 @@ public class PositionManager implements IUpdatable {
     private void spawnNextPlateform() {
         Random r = new Random();
 
-        int minY = 10;
-        int maxY = (int)Math.round(this.instanceManager.getJumper().getJumpHeight());
-
         double x = r.nextInt(this.display.getWidth());
-        double y = r.nextInt(maxY - minY) + minY;
+        double y = r.nextInt(this.maxY - this.minY) + this.minY;
 
         double pos = this.instanceManager.getPosLastPlateform();
         this.instanceManager.addPlateform(x, pos - y);
@@ -119,13 +124,14 @@ public class PositionManager implements IUpdatable {
         // Jumper at middle of the screen (move plateforms down)
         if (CollisionManager.isJumperAtMiddleScreen(jumper, this.display.getHeight())) {
 
-            this.currentJumpHeight += jumper.getJumpSpeed();
+            double reducer = this.calculateReducer(jumper);
+            this.currentJumpHeight += (jumper.getJumpSpeed() * reducer);
 
             // smoother jump after moving plateforms down
             if (this.currentJumpHeight >= Constants.SMOOTH_JUMP_AT_MIDDLE_PERCENTAGE * jumper.getJumpHeight()) {
-                this.movePlateformsDown(jumper.getJumpSpeed() + Constants.SMOOTH_JUMP_AT_MIDDLE_MULTIPLIER);
+                this.movePlateformsDown((jumper.getJumpSpeed() * reducer) + Constants.SMOOTH_JUMP_AT_MIDDLE_MULTIPLIER);
             } else {
-                this.movePlateformsDown(jumper.getJumpSpeed());
+                this.movePlateformsDown(jumper.getJumpSpeed() * reducer);
             }
 
             this.updateScore(jumper.getJumpSpeed());
@@ -135,6 +141,10 @@ public class PositionManager implements IUpdatable {
 
         // default: move jumper  up
         this.moveJumperUp(jumper);
+
+        if (this.gameService.getScore() < this.currentJumpHeight) {
+            this.updateScore(this.currentJumpHeight);
+        }
     }
 
     private void moveVerticalJumperDown(Jumper jumper) {
@@ -153,9 +163,7 @@ public class PositionManager implements IUpdatable {
 
         // Jumper outside of the screen - game over
         if (CollisionManager.isJumperOutsideScreenVertical(jumper, this.display.getHeight())) {
-
-            Log.d("POSITION MANAGER", "RIP DEAD");
-            jumper.setJumpDirection(true);
+            this.gameService.handleDeath();
         }
 
         // default: move jumper down

@@ -105,4 +105,8 @@ public class GameService implements IService {
     public int getScore() {
         return score;
     }
+
+    public void handleDeath() {
+        this.activity.showMenu();
+    }
 }

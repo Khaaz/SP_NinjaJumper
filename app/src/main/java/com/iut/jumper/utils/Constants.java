@@ -6,7 +6,10 @@ public class Constants {
     public static final double SENSOR_TO_SPEED_MULTIPLIER = 10;
     public static final double JUMP_SPEED = 25;
 
-    public static final double JUMP_HEIGHT = 700;
+    public static final double STARTING_MIN_Y_MULTIPLIER = 0.1;
+    public static final double STARTING_MAX_Y_MULTIPLIER = 0.25;
+
+    public static final double STARTING_X_PERCENTAGE = 0.05;
 
     public static final double SMOOTH_JUMP_AT_MIDDLE_PERCENTAGE = 0.95;
     public static final double SMOOTH_JUMP_AT_MIDDLE_MULTIPLIER = 5;

@@ -64,12 +64,12 @@ public class GameView extends View {
     protected void onDraw(Canvas canvas) {
 
         synchronized (sFrameLock) {
-            Jumper j = this.instanceManager.getJumper();
-            canvas.drawBitmap(j.getDirection() ? this.jumper : this.jumperReverse, (int)j.getPosX(), (int)j.getPosY(), null);
-
             for(APlateform p : this.instanceManager.getPlateforms()) {
                 canvas.drawBitmap(this.getOrCreatePlateformBitmap(p), (int)p.getPosX(), (int)p.getPosY(), null);
             }
+
+            Jumper j = this.instanceManager.getJumper();
+            canvas.drawBitmap(j.getDirection() ? this.jumper : this.jumperReverse, (int)j.getPosX(), (int)j.getPosY(), null);
         }
     }
 

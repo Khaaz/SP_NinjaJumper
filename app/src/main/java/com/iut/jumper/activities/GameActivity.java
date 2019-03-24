@@ -1,5 +1,6 @@
 package com.iut.jumper.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
@@ -8,6 +9,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.iut.jumper.MainActivity;
 import com.iut.jumper.R;
 import com.iut.jumper.core.managers.GameService;
 import com.iut.jumper.views.GameView;
@@ -34,6 +36,11 @@ public class GameActivity extends AActivity {
 
     public GameService getGameService() {
         return gameService;
+    }
+
+    public void showMenu() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
     @Override
