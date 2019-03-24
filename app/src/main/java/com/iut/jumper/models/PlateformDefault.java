@@ -1,9 +1,9 @@
 package com.iut.jumper.models;
 
-import com.iut.jumper.R;
+import com.iut.jumper.utils.PlateformType;
 
 public class PlateformDefault extends APlateform {
-    public PlateformDefault(int width, int height) {
-        super(R.drawable.rect, width, height, false, false, 0);
+    public PlateformDefault(int width, int height, double posX, double posY) {
+        super(PlateformType.DEFAULT ,width, height, posX, posY, false, false, 0);
     }
 }

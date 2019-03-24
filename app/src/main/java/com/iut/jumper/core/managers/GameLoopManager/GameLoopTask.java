@@ -1,7 +1,5 @@
 package com.iut.jumper.core.managers.GameLoopManager;
 
-import android.util.Log;
-
 import com.iut.jumper.core.managers.GameService;
 import com.iut.jumper.utils.Constants;
 import com.iut.jumper.views.GameView;
@@ -32,20 +30,20 @@ public class GameLoopTask implements Runnable {
         this.running = false;
     }
 
-    public void start() {
+    protected void start() {
         if (!this.running) {
             this.running = true;
             this.scheduleNextInvocation();
         }
     }
 
-    public void pause() {
+    protected void pause() {
         if (this.running) {
             this.running = false;
         }
     }
 
-    public void resume() {
+    protected void resume() {
         if (!this.running) {
             this.running = true;
             this.scheduleNextInvocation();

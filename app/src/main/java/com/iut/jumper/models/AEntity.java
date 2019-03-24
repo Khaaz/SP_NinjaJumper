@@ -9,12 +9,11 @@ public abstract class AEntity {
     private final int width;
     private final int height;
 
-    private final int skin;
-
-    public AEntity(int skin, int width, int height) {
-        this.skin = skin;
+    public AEntity(int width, int height, double posX, double posY) {
         this.width = width;
         this.height = height;
+        this.posX = posX;
+        this.posY = posY;
     }
 
     public double getPosY() {
@@ -39,10 +38,6 @@ public abstract class AEntity {
 
     public void setSpeed(double speed) {
         this.speed = speed;
-    }
-
-    public int getSkin() {
-        return skin;
     }
 
     public int getWidth() {

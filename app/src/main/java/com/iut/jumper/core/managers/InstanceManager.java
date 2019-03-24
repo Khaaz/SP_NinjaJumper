@@ -1,21 +1,21 @@
 package com.iut.jumper.core.managers;
 
-import android.util.Log;
-import android.view.Display;
-
-import com.iut.jumper.models.AEntity;
+import com.iut.jumper.R;
 import com.iut.jumper.models.APlateform;
 import com.iut.jumper.models.Jumper;
+import com.iut.jumper.models.PlateformDefault;
+import com.iut.jumper.utils.Constants;
 import com.iut.jumper.utils.Positioner;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.concurrent.LinkedBlockingDeque;
 
 public class InstanceManager {
 
     private GameService gameService;
 
-    private List<APlateform> plateforms;
+    private LinkedBlockingDeque<APlateform> plateforms;
 
     private Jumper jumper;
     private final int screenWidth;
@@ -27,30 +27,38 @@ public class InstanceManager {
         this.screenWidth = this.gameService.getDisplay().getWidth();
         this.screenHeight = this.gameService.getDisplay().getHeight();
 
-        this.plateforms = new ArrayList<>();
+        this.plateforms = new LinkedBlockingDeque<>();
 
-        this.jumper = new Jumper((int)Math.round(this.screenWidth * 0.15), (int)Math.round(this.screenWidth * 0.25));
+        this.jumper = new Jumper(R.drawable.ninjablanc_right, (int)Math.round(this.screenWidth * 0.15), (int)Math.round(this.screenWidth * 0.25), 0, 0, Constants.JUMP_HEIGHT);
 
         Positioner.setYBottom(this.jumper, this.screenHeight);
-
-        Log.d("IMANAGER", String.valueOf(this.screenWidth));
-        Log.d("IMANAGER", String.valueOf(this.screenHeight));
-        Log.d("IMANAGER", "=======");
-        Log.d("IMANAGER", String.valueOf(this.jumper.getDirection()));
-        Log.d("IMANAGER", String.valueOf(this.jumper.getSpeed()));
-        Log.d("IMANAGER", String.valueOf(this.jumper.getPosX()));
-        Log.d("IMANAGER", String.valueOf(this.jumper.getPosY()));
-        Log.d("IMANAGER", String.valueOf(this.jumper.getHeight()));
-        Log.d("IMANAGER", String.valueOf(this.jumper.getWidth()));
-
-
     }
 
     public Jumper getJumper() {
         return jumper;
     }
 
-    public List<APlateform> getPlateforms() {
-        return plateforms;
+
+    protected double getPosLastPlateform() {
+        return this.plateforms.peekLast().getPosY();
+    }
+
+    protected double getPosFirstPlateform() {
+        return this.plateforms.peekFirst().getPosY();
+    }
+
+    public Collection<APlateform> getPlateforms() {
+        return Collections.unmodifiableCollection(this.plateforms);
+    }
+
+    protected void removePlateform() {
+        this.plateforms.remove();
+    }
+
+    protected void addPlateform(double x, double y) {
+        int width =(int)(Math.round(this.screenWidth * 0.2));
+        int height = (int)(Math.round(this.screenHeight * 0.015));
+
+        this.plateforms.add(new PlateformDefault(width, height, x > (this.screenWidth - width) ? x - width : x, y));
     }
 }

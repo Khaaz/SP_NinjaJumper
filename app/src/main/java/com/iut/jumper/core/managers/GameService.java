@@ -4,11 +4,14 @@ import android.content.Context;
 import android.util.Log;
 import android.view.Display;
 
+import com.iut.jumper.activities.GameActivity;
 import com.iut.jumper.core.managers.GameLoopManager.GameLoopService;
 import com.iut.jumper.interfaces.IService;
 import com.iut.jumper.views.GameView;
 
 public class GameService implements IService {
+
+    private final GameActivity activity;
 
     private final SensorService sensorService;
     private GameLoopService gameLoopService;
@@ -18,10 +21,14 @@ public class GameService implements IService {
 
     private final Display display;
 
+    private int score;
+
 
     // CREATE - INSTANTIATE elements
     public GameService(Context context, Display display) {
         Log.d("GAMEMANAGER", "create)");
+
+        this.activity = (GameActivity)context;
 
         this.display = display;
         this.instanceManager = new InstanceManager(this);
@@ -49,6 +56,7 @@ public class GameService implements IService {
     // START ELEMENTS
     @Override
     public void start() {
+        this.score = 0;
         this.sensorService.start();
         this.gameLoopService.start();
         Log.d("GAMEMANAGER", "start)");
@@ -76,5 +84,19 @@ public class GameService implements IService {
         this.sensorService.stop();
         this.gameLoopService.stop();
         Log.d("GAMEMANAGER", "stop)");
+    }
+
+    protected void updateScore(final int score) {
+        final GameActivity activity = this.activity;
+        this.activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                activity.updateScore(score);
+            }
+        });
+    }
+
+    public int getScore() {
+        return score;
     }
 }

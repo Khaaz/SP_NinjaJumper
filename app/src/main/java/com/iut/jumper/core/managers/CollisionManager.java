@@ -7,8 +7,8 @@ public class CollisionManager {
 
     public static Boolean checkJumperPlateformCollision(AEntity jumper, AEntity plateform) {
         return (
-                Positioner.getYBottom(jumper) <= Positioner.getYTop(plateform)
-                && Positioner.getYBottom(jumper) >= Positioner.getYBottom(plateform)
+                Positioner.getYBottom(jumper) >= Positioner.getYTop(plateform)
+                && Positioner.getYBottom(jumper) <= Positioner.getYBottom(plateform)
                 && Positioner.getXRight(jumper) > Positioner.getXLeft(plateform)
                 && Positioner.getXLeft(jumper) < Positioner.getXRight(plateform)
         );
@@ -50,7 +50,7 @@ public class CollisionManager {
 
     public static boolean isJumperAtMiddleScreen(AEntity a, int screenHeight) {
         return (
-                Positioner.getYCenter(a) >= (screenHeight/2)
+                Positioner.getYCenter(a) <= (screenHeight/2)
         );
     }
 }

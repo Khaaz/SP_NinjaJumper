@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.iut.jumper.R;
 import com.iut.jumper.core.managers.GameService;
@@ -72,13 +75,31 @@ public class GameActivity extends AActivity {
         super.onRestart();
     }
 
+    public void updateScore(int score) {
+        TextView scoreText = findViewById(R.id.textViewScore);
+        scoreText.setText(String.valueOf(score));
+    }
+
     public void pauseButton(View view) {
+        if (!this.paused) {
+            this.paused = true;
+            this.gameService.pause();
+            view.setVisibility(View.GONE);
+
+            ImageView playButton = findViewById(R.id.imageViewPlay);
+            playButton.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public void playButton(View view) {
         if (this.paused) {
             this.paused = false;
             this.gameService.resume();
-        } else {
-            this.paused = true;
-            this.gameService.pause();
+
+            view.setVisibility(View.GONE);
+
+            ImageView playButton = findViewById(R.id.imageViewPause);
+            playButton.setVisibility(View.VISIBLE);
         }
     }
 }

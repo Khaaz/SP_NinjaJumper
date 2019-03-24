@@ -11,5 +11,10 @@
     <string name="rouge">Skin Rouge</string>
     <string name="violet">Skin Violet</string>
 
+    <string name="resumeButton">Resume</string>
+    <string name="pauseButton">Pause</string>
+
+    <string name="score">0</string>
+
 
 </resources>

@@ -114,11 +114,11 @@ public class OptionsActivity extends AActivity{
 
     public static int skinChecked(){
         if (skinB.isChecked()){
-            return R.drawable.ninjablanc;
+            return R.drawable.ninjablanc_left;
         }
         else if (skinR.isChecked()){
-            return R.drawable.ninjarouge;
+            return R.drawable.ninjarouge_left;
         }
-        else return R.drawable.ninjaviolet;
+        else return R.drawable.ninjaviolet_left;
     }
 }

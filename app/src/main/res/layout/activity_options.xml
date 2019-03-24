@@ -96,7 +96,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:contentDescription="skinBase"
-            app:srcCompat="@drawable/ninjablanc" />
+            app:srcCompat="@drawable/ninjablanc_left" />
 
         <ImageView
             android:id="@+id/imageView3"
@@ -104,7 +104,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:contentDescription="skinMomie"
-            app:srcCompat="@drawable/ninjaviolet" />
+            app:srcCompat="@drawable/ninjaviolet_left" />
 
         <ImageView
             android:id="@+id/imageView4"
@@ -112,7 +112,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:contentDescription="skinNoel"
-            app:srcCompat="@drawable/ninjarouge" />
+            app:srcCompat="@drawable/ninjarouge_left" />
     </RadioGroup>
 
 </android.support.constraint.ConstraintLayout>
