@@ -17,10 +17,8 @@ public class PositionManager implements IUpdatable {
 
     private final Display display;
 
-
     private double currentJumpHeight;
 
-    private double score;
 
     public PositionManager(GameService gameService) {
         this.gameService = gameService;
@@ -30,7 +28,6 @@ public class PositionManager implements IUpdatable {
         this.display = this.gameService.getDisplay();
 
         this.currentJumpHeight = 0;
-        this.score = 0;
 
         this.initPlateforms();
     }
@@ -183,8 +180,7 @@ public class PositionManager implements IUpdatable {
     }
 
     private void updateScore(double score) {
-        this.score += score;
-        this.gameService.updateScore((int)Math.round(this.score));
+        this.gameService.increaseScore((int)Math.round(score));
     }
 
     protected void updateJumperSpeed(double speed) {

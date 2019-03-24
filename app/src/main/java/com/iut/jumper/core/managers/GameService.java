@@ -28,6 +28,8 @@ public class GameService implements IService {
     public GameService(Context context, Display display) {
         Log.d("GAMEMANAGER", "create)");
 
+        this.score = 0;
+        
         this.activity = (GameActivity)context;
 
         this.display = display;
@@ -56,7 +58,6 @@ public class GameService implements IService {
     // START ELEMENTS
     @Override
     public void start() {
-        this.score = 0;
         this.sensorService.start();
         this.gameLoopService.start();
         Log.d("GAMEMANAGER", "start)");
@@ -86,14 +87,19 @@ public class GameService implements IService {
         Log.d("GAMEMANAGER", "stop)");
     }
 
-    protected void updateScore(final int score) {
+    public void updateScore() {
         final GameActivity activity = this.activity;
+        final int score = this.score;
         this.activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 activity.updateScore(score);
             }
         });
+    }
+
+    protected void increaseScore(int score) {
+        this.score += score;
     }
 
     public int getScore() {

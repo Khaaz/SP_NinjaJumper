@@ -65,6 +65,7 @@ public class GameLoopTask implements Runnable {
 
     private void execute() {
         this.gameService.getPositionManager().update();
+        this.gameService.updateScore();
         this.gameView.postInvalidate();
     }
 }
