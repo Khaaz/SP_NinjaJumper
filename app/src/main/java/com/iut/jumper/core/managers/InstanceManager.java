@@ -29,7 +29,7 @@ public class InstanceManager {
 
         this.plateforms = new LinkedBlockingDeque<>();
 
-        this.jumper = new Jumper(R.drawable.ninjablanc_right, (int)Math.round(this.screenWidth * 0.15), (int)Math.round(this.screenWidth * 0.25), 0, 0, Constants.JUMP_HEIGHT);
+        this.jumper = new Jumper(R.drawable.ninjablanc_right, (int)Math.round(this.screenWidth * Constants.SCALE_JUMPER_WIDTH), (int)Math.round(this.screenWidth * Constants.SCALE_JUMPER_HEIGHT), 0, 0, this.screenHeight * Constants.SCALE_JUMPER_JUMP);
 
         Positioner.setYBottom(this.jumper, this.screenHeight);
     }
@@ -56,8 +56,8 @@ public class InstanceManager {
     }
 
     protected void addPlateform(double x, double y) {
-        int width =(int)(Math.round(this.screenWidth * 0.2));
-        int height = (int)(Math.round(this.screenHeight * 0.015));
+        int width =(int)(Math.round(this.screenWidth * Constants.SCALE_PLATEFORM_WIDTH));
+        int height = (int)(Math.round(this.screenHeight * Constants.SCALE_PLATEFORM_HEIGHT));
 
         this.plateforms.add(new PlateformDefault(width, height, x > (this.screenWidth - width) ? x - width : x, y));
     }

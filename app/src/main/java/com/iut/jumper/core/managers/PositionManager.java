@@ -6,6 +6,7 @@ import android.view.Display;
 import com.iut.jumper.interfaces.IUpdatable;
 import com.iut.jumper.models.APlateform;
 import com.iut.jumper.models.Jumper;
+import com.iut.jumper.utils.Constants;
 import com.iut.jumper.utils.Positioner;
 
 import java.util.Random;
@@ -107,10 +108,9 @@ public class PositionManager implements IUpdatable {
 
     private void moveVerticalJumperUp(Jumper jumper) {
         // Jumper jump height
-        if (this.currentJumpHeight > jumper.getJumpHeight()) {
+        if (this.currentJumpHeight >= jumper.getJumpHeight()) {
 
             jumper.setJumpDirection(false);
-            this.currentJumpHeight = 0;
             this.moveJumperDown(jumper);
 
             return;
@@ -120,14 +120,20 @@ public class PositionManager implements IUpdatable {
         if (CollisionManager.isJumperAtMiddleScreen(jumper, this.display.getHeight())) {
 
             this.currentJumpHeight += jumper.getJumpSpeed();
-            this.movePlateformsDown(jumper.getJumpSpeed());
+
+            // smoother jump after moving plateforms down
+            if (this.currentJumpHeight >= Constants.SMOOTH_JUMP_AT_MIDDLE_PERCENTAGE * jumper.getJumpHeight()) {
+                this.movePlateformsDown(jumper.getJumpSpeed() + Constants.SMOOTH_JUMP_AT_MIDDLE_MULTIPLIER);
+            } else {
+                this.movePlateformsDown(jumper.getJumpSpeed());
+            }
+
             this.updateScore(jumper.getJumpSpeed());
 
             return;
         }
 
         // default: move jumper  up
-        this.currentJumpHeight += jumper.getJumpSpeed();
         this.moveJumperUp(jumper);
     }
 
@@ -137,6 +143,7 @@ public class PositionManager implements IUpdatable {
         for (APlateform p : this.instanceManager.getPlateforms()) {
             if (CollisionManager.checkJumperPlateformCollision(jumper, p)) {
 
+                this.currentJumpHeight = 0;
                 jumper.setJumpDirection(true);
                 this.moveJumperUp(jumper);
 
@@ -172,11 +179,35 @@ public class PositionManager implements IUpdatable {
     }
 
     private void moveJumperDown(Jumper jumper) {
-        Positioner.setYTop(jumper, jumper.getPosY() + jumper.getJumpSpeed());
+        double reducer = this.calculateReducer(jumper);
+
+        this.currentJumpHeight -= (jumper.getJumpSpeed() * reducer);
+
+        Positioner.setYTop(jumper, jumper.getPosY() + (jumper.getJumpSpeed() * reducer));
     }
 
     private void moveJumperUp(Jumper jumper) {
-        Positioner.setYTop(jumper, jumper.getPosY() - jumper.getJumpSpeed());
+        double reducer = this.calculateReducer(jumper);
+
+        this.currentJumpHeight += (jumper.getJumpSpeed() * reducer);
+        Positioner.setYTop(jumper, jumper.getPosY() - (jumper.getJumpSpeed() * reducer));
+    }
+
+    private double calculateReducer(Jumper jumper) {
+        double reducer = 1;
+
+        // smoother jump (speed reduce when near max jump height)
+        if (this.currentJumpHeight >= Constants.SMOOTH_JUMP_PERCENTAGE_3 * jumper.getJumpHeight()) {
+            reducer = Constants.SMOOTH_JUMP_REDUCER_3;
+        }
+        else if (this.currentJumpHeight >= Constants.SMOOTH_JUMP_PERCENTAGE_2 * jumper.getJumpHeight()) {
+            reducer = Constants.SMOOTH_JUMP_REDUCER_2;
+        }
+        else if (this.currentJumpHeight >= Constants.SMOOTH_JUMP_PERCENTAGE_1 * jumper.getJumpHeight()) {
+            reducer = Constants.SMOOTH_JUMP_REDUCER_1;
+        }
+
+        return reducer;
     }
 
     private void updateScore(double score) {

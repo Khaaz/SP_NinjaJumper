@@ -29,7 +29,7 @@ public class GameService implements IService {
         Log.d("GAMEMANAGER", "create)");
 
         this.score = 0;
-        
+
         this.activity = (GameActivity)context;
 
         this.display = display;
@@ -99,7 +99,7 @@ public class GameService implements IService {
     }
 
     protected void increaseScore(int score) {
-        this.score += score;
+        this.score += score/10;
     }
 
     public int getScore() {
