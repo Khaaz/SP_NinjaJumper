@@ -121,4 +121,12 @@ public class OptionsActivity extends AActivity{
         }
         else return R.drawable.ninjaviolet_left;
     }
+
+    public static boolean music(){
+        return musique.isChecked();
+    }
+
+    public static boolean hardmode(){
+        return hardmode.isChecked();
+    }
 }

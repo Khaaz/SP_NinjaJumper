@@ -18,11 +18,16 @@ public class GameActivity extends AActivity {
 
     private GameService gameService;
     private boolean paused;
+    private boolean music;
+    private boolean hardmode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d("JUMPER-Play", "onCreate");
+
+        music = OptionsActivity.music();
+        hardmode = OptionsActivity.hardmode();
 
         Display display = getWindowManager().getDefaultDisplay();
 
