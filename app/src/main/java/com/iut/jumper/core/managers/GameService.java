@@ -46,6 +46,7 @@ public class GameService implements IService {
         this.sensorService = new SensorService(context, this);
 
         this.soundManager = new SoundManager(context, true);
+        this.soundManager.playMusic();
     }
 
     public InstanceManager getInstanceManager() {
