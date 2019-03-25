@@ -16,8 +16,8 @@ public class OptionsActivity extends AActivity{
     SharedPreferences options;
     SharedPreferences.Editor editor;
 
-    Switch musique;
-    Switch difficulty;
+    static Switch musique;
+    static Switch difficulty;
 
     RadioGroup skins;
     static RadioButton skinB;
@@ -127,6 +127,6 @@ public class OptionsActivity extends AActivity{
     }
 
     public static boolean hardmode(){
-        return hardmode.isChecked();
+        return difficulty.isChecked();
     }
 }

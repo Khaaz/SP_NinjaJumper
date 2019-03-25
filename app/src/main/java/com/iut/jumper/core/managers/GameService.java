@@ -55,19 +55,15 @@ public class GameService implements IService {
         this.gameLoopService = new GameLoopService(this, gameView);
     }
 
-    // START ELEMENTS
     @Override
     public void start() {
-        this.sensorService.start();
-        this.gameLoopService.start();
         Log.d("GAMEMANAGER", "start)");
     }
 
-    // resume call on all services
     @Override
     public void resume() {
         this.sensorService.start();
-        this.gameLoopService.resume();
+        this.gameLoopService.start();
         Log.d("GAMEMANAGER", "resume)");
     }
 
@@ -107,6 +103,7 @@ public class GameService implements IService {
     }
 
     public void handleDeath() {
+        this.stop();
         this.activity.showMenu();
     }
 }

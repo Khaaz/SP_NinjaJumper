@@ -26,8 +26,8 @@ public class GameActivity extends AActivity {
         super.onCreate(savedInstanceState);
         Log.d("JUMPER-Play", "onCreate");
 
-        music = OptionsActivity.music();
-        hardmode = OptionsActivity.hardmode();
+        //music = OptionsActivity.music();
+        //hardmode = OptionsActivity.hardmode();
 
         Display display = getWindowManager().getDefaultDisplay();
 
@@ -37,6 +37,8 @@ public class GameActivity extends AActivity {
 
         GameView gameView = findViewById(R.id.gameView);
         this.gameService.startGameloop(gameView);
+
+        this.paused = false;
     }
 
     public GameService getGameService() {
@@ -50,24 +52,21 @@ public class GameActivity extends AActivity {
 
     @Override
     protected void onStart() {
-        this.paused = false;
-        this.gameService.start();
+        //this.gameService.start();
         super.onStart();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        if (!this.paused) {
-            this.paused = true;
+        if (this.paused) {
             this.gameService.pause();
         }
     }
 
     @Override
     protected void onResume() {
-        if (this.paused) {
-            this.paused = false;
+        if (!this.paused) {
             this.gameService.resume();
         }
         super.onResume();
