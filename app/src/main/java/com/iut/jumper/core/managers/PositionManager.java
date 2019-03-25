@@ -20,9 +20,6 @@ public class PositionManager implements IUpdatable {
 
     private double currentJumpHeight;
 
-    private int minY;
-    private int maxY;
-
 
     public PositionManager(GameService gameService) {
         this.gameService = gameService;
@@ -32,10 +29,6 @@ public class PositionManager implements IUpdatable {
         this.display = this.gameService.getDisplay();
 
         this.currentJumpHeight = 0;
-
-        double jumpHeight = this.instanceManager.getJumper().getJumpHeight();
-        this.minY = (int)Math.round(jumpHeight * Constants.STARTING_MIN_Y_MULTIPLIER);
-        this.maxY = (int)Math.round(jumpHeight * Constants.STARTING_MAX_Y_MULTIPLIER);
 
         this.initPlateforms();
     }
@@ -49,12 +42,15 @@ public class PositionManager implements IUpdatable {
     private void initPlateforms() {
         double totalHeight = this.display.getHeight();
 
+        int minY = this.gameService.getDifficultyManager().getMinY();
+        int maxY = this.gameService.getDifficultyManager().getMaxY();
+
         totalHeight -= (Constants.STARTING_X_PERCENTAGE * totalHeight);
         this.instanceManager.addPlateform(this.display.getWidth() / 2, totalHeight);
 
         Random r = new Random();
         while (totalHeight > 0) {
-            double y = r.nextInt(this.maxY - this.minY) + this.minY;
+            double y = r.nextInt(maxY - minY) + minY;
             double x = r.nextInt(this.display.getWidth());
 
             totalHeight -= y;
@@ -67,8 +63,11 @@ public class PositionManager implements IUpdatable {
     private void spawnNextPlateform() {
         Random r = new Random();
 
+        int minY = this.gameService.getDifficultyManager().getMinY();
+        int maxY = this.gameService.getDifficultyManager().getMaxY();
+
         double x = r.nextInt(this.display.getWidth());
-        double y = r.nextInt(this.maxY - this.minY) + this.minY;
+        double y = r.nextInt(maxY - minY) + minY;
 
         double pos = this.instanceManager.getPosLastPlateform();
         this.instanceManager.addPlateform(x, pos - y);

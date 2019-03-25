@@ -41,8 +41,8 @@ public class SensorService implements SensorEventListener {
          double curX = event.values[0];
 
         if (sensibility(curX)) {
-            Log.d("JUMPER-SENSOR", "SENSIBLE"); // x
-            Log.d("JUMPER-SENSOR", String.valueOf(event.values[0])); // x
+            //Log.d("JUMPER-SENSOR", "SENSIBLE"); // x
+            //Log.d("JUMPER-SENSOR", String.valueOf(event.values[0])); // x
 
             this.gameService.getPositionManager().updateJumperDirection(curX < 0);
 

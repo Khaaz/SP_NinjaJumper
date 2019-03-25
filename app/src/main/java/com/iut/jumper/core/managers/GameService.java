@@ -19,6 +19,8 @@ public class GameService implements IService {
     private final InstanceManager instanceManager;
     private final PositionManager positionManager;
 
+    private final DifficultyManager difficultyManager;
+
     private final Display display;
 
     private int score;
@@ -34,6 +36,9 @@ public class GameService implements IService {
 
         this.display = display;
         this.instanceManager = new InstanceManager(this);
+
+        this.difficultyManager = new DifficultyManager(this.instanceManager.getJumper().getJumpHeight());
+
         this.positionManager = new PositionManager(this);
 
         this.sensorService = new SensorService(context, this);
@@ -45,6 +50,10 @@ public class GameService implements IService {
 
     public PositionManager getPositionManager() {
         return positionManager;
+    }
+
+    public DifficultyManager getDifficultyManager() {
+        return difficultyManager;
     }
 
     public Display getDisplay() {
@@ -96,6 +105,8 @@ public class GameService implements IService {
 
     protected void increaseScore(int score) {
         this.score += score/10;
+
+        this.difficultyManager.checkScoreStep(this.score);
     }
 
     public int getScore() {

@@ -16,7 +16,7 @@ public class GameLoopService implements IService {
     public GameLoopService(GameService gameService, GameView gameView) {
         this.scheduler = Executors.newScheduledThreadPool(0);
         this.gameLoopTask = new GameLoopTask(scheduler, gameService, gameView);
-        this.start();
+        //this.start();
     }
 
     @Override
@@ -42,6 +42,5 @@ public class GameLoopService implements IService {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
     }
 }
