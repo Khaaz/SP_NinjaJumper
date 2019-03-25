@@ -148,16 +148,14 @@ public class PositionManager implements IUpdatable {
 
     private void moveVerticalJumperDown(Jumper jumper) {
 
-        // check collisions with plateforms
+        // check collisions with plateforms ( ONJUMP)
         for (APlateform p : this.instanceManager.getPlateforms()) {
+
             if (CollisionManager.checkJumperPlateformCollision(jumper, p)) {
-
-                this.currentJumpHeight = 0;
-                jumper.setJumpDirection(true);
-                this.moveJumperUp(jumper);
-
+                this.onJump(jumper);
                 return;
             }
+
         }
 
         // Jumper outside of the screen - game over
@@ -167,6 +165,13 @@ public class PositionManager implements IUpdatable {
 
         // default: move jumper down
         this.moveJumperDown(jumper);
+    }
+
+    private void onJump(Jumper jumper) {
+        this.currentJumpHeight = 0;
+        jumper.setJumpDirection(true);
+        this.gameService.onJump();
+        this.moveJumperUp(jumper);
     }
 
     private void spawnAndDeletePlateforms() {

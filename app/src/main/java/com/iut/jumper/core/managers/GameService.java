@@ -21,6 +21,8 @@ public class GameService implements IService {
 
     private final DifficultyManager difficultyManager;
 
+    private final SoundManager soundManager;
+
     private final Display display;
 
     private int score;
@@ -42,6 +44,8 @@ public class GameService implements IService {
         this.positionManager = new PositionManager(this);
 
         this.sensorService = new SensorService(context, this);
+
+        this.soundManager = new SoundManager(context, true);
     }
 
     public InstanceManager getInstanceManager() {
@@ -90,6 +94,10 @@ public class GameService implements IService {
         this.sensorService.stop();
         this.gameLoopService.stop();
         Log.d("GAMEMANAGER", "stop)");
+    }
+
+    public void onJump() {
+        this.soundManager.playJumpSound();
     }
 
     public void updateScore() {
