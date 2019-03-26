@@ -122,6 +122,18 @@ public class OptionsActivity extends AActivity{
         else return R.drawable.ninjaviolet_left;
     }
 
+    public static int skinCheckedReverse(){
+        if (skinB.isChecked()){
+            return R.drawable.ninjablanc_right;
+        }
+        else if (skinR.isChecked()){
+            return R.drawable.ninjarouge_right;
+        }
+        else return R.drawable.ninjaviolet_right;
+    }
+
+
+
     public static boolean music(){
         return musique.isChecked();
     }

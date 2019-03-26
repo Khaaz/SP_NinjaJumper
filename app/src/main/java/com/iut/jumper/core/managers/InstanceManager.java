@@ -1,6 +1,7 @@
 package com.iut.jumper.core.managers;
 
 import com.iut.jumper.R;
+import com.iut.jumper.activities.OptionsActivity;
 import com.iut.jumper.models.APlateform;
 import com.iut.jumper.models.Jumper;
 import com.iut.jumper.models.PlateformDefault;
@@ -29,7 +30,7 @@ public class InstanceManager {
 
         this.plateforms = new LinkedBlockingDeque<>();
 
-        this.jumper = new Jumper(R.drawable.ninjablanc_right, (int)Math.round(this.screenWidth * Constants.SCALE_JUMPER_WIDTH), (int)Math.round(this.screenWidth * Constants.SCALE_JUMPER_HEIGHT), 0, 0, this.screenHeight * Constants.SCALE_JUMPER_JUMP);
+        this.jumper = new Jumper(OptionsActivity.skinCheckedReverse(), (int)Math.round(this.screenWidth * Constants.SCALE_JUMPER_WIDTH), (int)Math.round(this.screenWidth * Constants.SCALE_JUMPER_HEIGHT), 0, 0, this.screenHeight * Constants.SCALE_JUMPER_JUMP);
 
         Positioner.setYBottom(this.jumper, this.screenHeight);
         Positioner.setXMiddle(this.jumper, this.screenWidth / 2);
