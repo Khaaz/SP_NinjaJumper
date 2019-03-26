@@ -37,7 +37,8 @@ public class OptionsActivity extends AActivity{
         musique = (Switch)findViewById(R.id.musique);
         difficulty = (Switch)findViewById(R.id.difficulty);
 
-        skins = (RadioGroup)findViewById(R.id.skin);
+        Log.d("test", "1");
+
         skinB = (RadioButton)findViewById(R.id.skinblanc);
         skinV = (RadioButton)findViewById(R.id.skinviolet);
         skinR = (RadioButton)findViewById(R.id.skinrouge);
@@ -123,6 +124,7 @@ public class OptionsActivity extends AActivity{
     }
 
     public static int skinCheckedReverse(){
+        Log.d("test", "2");
         if (skinB.isChecked()){
             return R.drawable.ninjablanc_right;
         }
