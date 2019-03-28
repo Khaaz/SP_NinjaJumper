@@ -13,8 +13,7 @@ import com.iut.jumper.R;
 
 public class OptionsActivity extends AActivity{
 
-    SharedPreferences options;
-    SharedPreferences.Editor editor;
+
 
     static Switch musique;
     static Switch difficulty;
@@ -31,8 +30,8 @@ public class OptionsActivity extends AActivity{
         Log.d("JUMPER-Options", "onCreate");
         setContentView(R.layout.activity_options);
 
-        options = PreferenceManager.getDefaultSharedPreferences(this);
-        editor = options.edit();
+        MainActivity.options = PreferenceManager.getDefaultSharedPreferences(this);
+        MainActivity.editor = MainActivity.options.edit();
 
         musique = (Switch)findViewById(R.id.musique);
         difficulty = (Switch)findViewById(R.id.difficulty);
@@ -44,12 +43,12 @@ public class OptionsActivity extends AActivity{
         skinR = (RadioButton)findViewById(R.id.skinrouge);
 
 
-        musique.setChecked(options.getBoolean("musique", true));
-        difficulty.setChecked(options.getBoolean("hardmode", false));
+        musique.setChecked(MainActivity.options.getBoolean("musique", true));
+        difficulty.setChecked(MainActivity.options.getBoolean("hardmode", false));
 
-        skinB.setChecked(options.getBoolean("blanc", true));
-        skinR.setChecked(options.getBoolean("rouge", false));
-        skinV.setChecked(options.getBoolean("violet", false));
+        skinB.setChecked(MainActivity.options.getBoolean("blanc", true));
+        skinR.setChecked(MainActivity.options.getBoolean("rouge", false));
+        skinV.setChecked(MainActivity.options.getBoolean("violet", false));
 
         musique.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -89,28 +88,28 @@ public class OptionsActivity extends AActivity{
     }
 
     private void changeValMusique(boolean mus){
-        editor.putBoolean("musique", mus);
-        editor.apply();
+        MainActivity.editor.putBoolean("musique", mus);
+        MainActivity.editor.apply();
     }
 
     private void changeValDiff(boolean dif){
-        editor.putBoolean("hardmode", dif);
-        editor.apply();
+        MainActivity.editor.putBoolean("hardmode", dif);
+        MainActivity.editor.apply();
     }
 
     private void skinBlanc(boolean check){
-        editor.putBoolean("blanc", check);
-        editor.apply();
+        MainActivity.editor.putBoolean("blanc", check);
+        MainActivity.editor.apply();
     }
 
     private void skinRouge(boolean check){
-        editor.putBoolean("rouge", check);
-        editor.apply();
+        MainActivity.editor.putBoolean("rouge", check);
+        MainActivity.editor.apply();
     }
 
     private void skinViolet(boolean check){
-        editor.putBoolean("violet", check);
-        editor.apply();
+        MainActivity.editor.putBoolean("violet", check);
+        MainActivity.editor.apply();
     }
 
     public static int skinChecked(){

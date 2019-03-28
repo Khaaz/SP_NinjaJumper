@@ -8,7 +8,7 @@
     android:background="@drawable/fondforet"
     android:orientation="vertical"
     android:visibility="visible"
-    tools:context=".MainActivity"
+    tools:context=".activities.MainActivity"
     tools:layout_editor_absoluteX="10dp"
     tools:layout_editor_absoluteY="10dp">
 
