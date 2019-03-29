@@ -1,8 +1,6 @@
 package com.iut.jumper.activities;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
@@ -45,8 +43,8 @@ public class GameActivity extends AActivity {
     }
 
     public void showMenu() {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        Intent intent = new Intent(this, DeathActivity.class);
+        intent.putExtra("Score", this.gameService.getScore());
         startActivity(intent);
     }
 

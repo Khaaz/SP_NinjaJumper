@@ -9,6 +9,7 @@ import com.iut.jumper.models.Jumper;
 import com.iut.jumper.utils.Constants;
 import com.iut.jumper.utils.Positioner;
 
+import java.util.Map;
 import java.util.Random;
 
 public class PositionManager implements IUpdatable {
@@ -141,8 +142,8 @@ public class PositionManager implements IUpdatable {
         // default: move jumper  up
         this.moveJumperUp(jumper);
 
-        if (this.gameService.getScore() < this.currentJumpHeight) {
-            this.updateScore(this.currentJumpHeight);
+        if (this.gameService.getScore() * 10 <= this.currentJumpHeight) {
+            this.updateScore(this.currentJumpHeight - this.gameService.getScore());
         }
     }
 
