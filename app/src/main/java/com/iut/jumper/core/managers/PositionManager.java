@@ -6,7 +6,9 @@ import android.view.Display;
 import com.iut.jumper.interfaces.IUpdatable;
 import com.iut.jumper.models.APlateform;
 import com.iut.jumper.models.Jumper;
+import com.iut.jumper.models.PlateformDisappear;
 import com.iut.jumper.utils.Constants;
+import com.iut.jumper.utils.PlateformType;
 import com.iut.jumper.utils.Positioner;
 
 import java.util.Map;
@@ -71,6 +73,15 @@ public class PositionManager implements IUpdatable {
         double y = r.nextInt(maxY - minY) + minY;
 
         double pos = this.instanceManager.getPosLastPlateform();
+
+        if (this.gameService.getDifficultyManager().isOneJumpPlateform()) {
+            int spawn = r.nextInt(this.gameService.getDifficultyManager().getOneJumpProbability());
+            if (spawn == 1) {
+                this.instanceManager.addOneJumpPlateform(x, pos - y);
+                return;
+            }
+        }
+
         this.instanceManager.addPlateform(x, pos - y);
     }
 
@@ -153,7 +164,7 @@ public class PositionManager implements IUpdatable {
         for (APlateform p : this.instanceManager.getPlateforms()) {
 
             if (CollisionManager.checkJumperPlateformCollision(jumper, p)) {
-                this.onJump(jumper);
+                this.onJump(jumper, p);
                 return;
             }
 
@@ -168,7 +179,12 @@ public class PositionManager implements IUpdatable {
         this.moveJumperDown(jumper);
     }
 
-    private void onJump(Jumper jumper) {
+    private void onJump(Jumper jumper, APlateform p) {
+
+        if (p instanceof PlateformDisappear) {
+            this.instanceManager.removePlateform(p);
+        }
+
         this.currentJumpHeight = 0;
         jumper.setJumpDirection(true);
         this.gameService.onJump();

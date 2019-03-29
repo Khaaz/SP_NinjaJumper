@@ -1,7 +1,5 @@
 package com.iut.jumper.core.managers;
 
-import android.util.Log;
-
 import com.iut.jumper.utils.Constants;
 
 public class DifficultyManager {
@@ -20,6 +18,10 @@ public class DifficultyManager {
     private double minYMultiplier;
     private double maxYMultiplier;
 
+    private boolean oneJumpPlateform;
+    private int oneJumpStep;
+    private int oneJumpProbability;
+
     public DifficultyManager(double jumpHeight) {
         this.jumpHeight = jumpHeight;
         this.maxHeight = (int) Math.round(jumpHeight * 0.9);
@@ -27,6 +29,10 @@ public class DifficultyManager {
         this.isMinYSet = false;
 
         this.step = 0;
+
+        this.oneJumpPlateform = false;
+        this.oneJumpProbability = Constants.INIT_PROBA_ONE_JUMP;
+        this.oneJumpStep = 0;
 
         this.minYMultiplier = Constants.STARTING_MIN_Y_MULTIPLIER;
         this.maxYMultiplier = Constants.STARTING_MAX_Y_MULTIPLIER;
@@ -37,6 +43,17 @@ public class DifficultyManager {
     protected void checkScoreStep(int score) {
         if (this.isMinYSet) {
             return;
+        }
+
+        if (!this.oneJumpPlateform && score > Constants.ONE_JUMP_TRESHOLD) {
+            this.oneJumpPlateform = true;
+        }
+        if (this.oneJumpPlateform && this.oneJumpProbability > 1) {
+            int oneJumpStep = score - (score % Constants.STEP_ONE_JUMP);
+            if (oneJumpStep > this.oneJumpStep) {
+                this.oneJumpStep = oneJumpStep;
+                this.oneJumpProbability -= 1;
+            }
         }
 
         if (this.isMaxYSet) {
@@ -84,5 +101,17 @@ public class DifficultyManager {
 
     protected int getMaxY() {
         return maxY;
+    }
+
+    public boolean isOneJumpPlateform() {
+        return oneJumpPlateform;
+    }
+
+    public int getOneJumpProbability() {
+        return oneJumpProbability;
+    }
+
+    public void setOneJumpProbability(int oneJumpProbability) {
+        this.oneJumpProbability = oneJumpProbability;
     }
 }

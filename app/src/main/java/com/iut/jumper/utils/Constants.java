@@ -6,6 +6,10 @@ public class Constants {
     public static final double SENSOR_TO_SPEED_MULTIPLIER = 10;
     public static final double JUMP_SPEED = 25;
 
+    public static final int INIT_PROBA_ONE_JUMP = 50;
+    public static final double ONE_JUMP_TRESHOLD = 3000;
+    public static final int STEP_ONE_JUMP = 1000;
+
     public static final int STEP_MIN_Y = 2000;
     public static final int STEP_MAX_Y = 1000;
 

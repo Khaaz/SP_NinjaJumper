@@ -3,6 +3,7 @@ package com.iut.jumper.core.managers;
 import com.iut.jumper.models.APlateform;
 import com.iut.jumper.models.Jumper;
 import com.iut.jumper.models.PlateformDefault;
+import com.iut.jumper.models.PlateformDisappear;
 import com.iut.jumper.utils.Constants;
 import com.iut.jumper.utils.Positioner;
 
@@ -55,10 +56,21 @@ public class InstanceManager {
         this.plateforms.remove();
     }
 
+    protected void removePlateform(APlateform p) {
+        this.plateforms.remove(p);
+    }
+
     protected void addPlateform(double x, double y) {
         int width =(int)(Math.round(this.screenWidth * Constants.SCALE_PLATEFORM_WIDTH));
         int height = (int)(Math.round(this.screenHeight * Constants.SCALE_PLATEFORM_HEIGHT));
 
         this.plateforms.add(new PlateformDefault(width, height, x > (this.screenWidth - width) ? x - width : x, y));
+    }
+
+    protected void addOneJumpPlateform(double x, double y) {
+        int width =(int)(Math.round(this.screenWidth * Constants.SCALE_PLATEFORM_WIDTH));
+        int height = (int)(Math.round(this.screenHeight * Constants.SCALE_PLATEFORM_HEIGHT));
+
+        this.plateforms.add(new PlateformDisappear(width, height, x > (this.screenWidth - width) ? x - width : x, y));
     }
 }
