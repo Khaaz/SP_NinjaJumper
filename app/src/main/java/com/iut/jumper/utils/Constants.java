@@ -35,4 +35,10 @@ public class Constants {
     public static final double SCALE_JUMPER_JUMP = 0.30;
     public static final double SCALE_PLATEFORM_HEIGHT = 0.012;
     public static final double SCALE_PLATEFORM_WIDTH = 0.15;
+
+    public static final String PREFERENCES_OPTIONS = "Options";
+    public static final String PREFERENCES_OPTIONS_MUSIC = "music";
+    public static final String PREFERENCES_OPTIONS_NINJAW = "ninja_white";
+    public static final String PREFERENCES_OPTIONS_NINJAP = "ninja_purple";
+    public static final String PREFERENCES_OPTIONS_NINJAR = "ninja_red";
 }

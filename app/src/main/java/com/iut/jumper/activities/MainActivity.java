@@ -3,6 +3,7 @@ package com.iut.jumper.activities;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 
@@ -13,9 +14,6 @@ import com.iut.jumper.activities.OptionsActivity;
 import com.iut.jumper.activities.ScoreActivity;
 
 public class MainActivity extends AActivity {
-
-    public static SharedPreferences options;
-    public static SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

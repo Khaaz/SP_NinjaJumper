@@ -2,27 +2,17 @@ package com.iut.jumper.activities;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Switch;
 
 import com.iut.jumper.R;
+import com.iut.jumper.utils.Constants;
 
 public class OptionsActivity extends AActivity{
 
-
-
-    static Switch musique;
-    static Switch difficulty;
-
-    RadioGroup skins;
-    static RadioButton skinB;
-    static RadioButton skinV;
-    static RadioButton skinR;
-
+    private SharedPreferences options;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,37 +20,25 @@ public class OptionsActivity extends AActivity{
         Log.d("JUMPER-Options", "onCreate");
         setContentView(R.layout.activity_options);
 
-        MainActivity.options = PreferenceManager.getDefaultSharedPreferences(this);
-        MainActivity.editor = MainActivity.options.edit();
+        this.options = getApplicationContext().getSharedPreferences(Constants.PREFERENCES_OPTIONS, 0);
 
-        musique = (Switch)findViewById(R.id.musique);
-        difficulty = (Switch)findViewById(R.id.difficulty);
+        Switch  musique = (Switch)findViewById(R.id.musique);
 
-        Log.d("test", "1");
-
-        skinB = (RadioButton)findViewById(R.id.skinblanc);
-        skinV = (RadioButton)findViewById(R.id.skinviolet);
-        skinR = (RadioButton)findViewById(R.id.skinrouge);
+        RadioButton skinB = (RadioButton)findViewById(R.id.skinblanc);
+        RadioButton skinV = (RadioButton)findViewById(R.id.skinviolet);
+        RadioButton skinR = (RadioButton)findViewById(R.id.skinrouge);
 
 
-        musique.setChecked(MainActivity.options.getBoolean("musique", true));
-        difficulty.setChecked(MainActivity.options.getBoolean("hardmode", false));
+        musique.setChecked(options.getBoolean(Constants.PREFERENCES_OPTIONS_MUSIC, true));
 
-        skinB.setChecked(MainActivity.options.getBoolean("blanc", true));
-        skinR.setChecked(MainActivity.options.getBoolean("rouge", false));
-        skinV.setChecked(MainActivity.options.getBoolean("violet", false));
+        skinB.setChecked(options.getBoolean(Constants.PREFERENCES_OPTIONS_NINJAW, true));
+        skinR.setChecked(options.getBoolean(Constants.PREFERENCES_OPTIONS_NINJAR, false));
+        skinV.setChecked(options.getBoolean(Constants.PREFERENCES_OPTIONS_NINJAP, false));
 
         musique.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 changeValMusique(isChecked);
-            }
-        });
-
-        difficulty.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                changeValDiff(isChecked);
             }
         });
 
@@ -88,58 +66,18 @@ public class OptionsActivity extends AActivity{
     }
 
     private void changeValMusique(boolean mus){
-        MainActivity.editor.putBoolean("musique", mus);
-        MainActivity.editor.apply();
-    }
-
-    private void changeValDiff(boolean dif){
-        MainActivity.editor.putBoolean("hardmode", dif);
-        MainActivity.editor.apply();
+        this.options.edit().putBoolean(Constants.PREFERENCES_OPTIONS_MUSIC, mus).apply();
     }
 
     private void skinBlanc(boolean check){
-        MainActivity.editor.putBoolean("blanc", check);
-        MainActivity.editor.apply();
+        this.options.edit().putBoolean(Constants.PREFERENCES_OPTIONS_NINJAW, check).apply();
     }
 
     private void skinRouge(boolean check){
-        MainActivity.editor.putBoolean("rouge", check);
-        MainActivity.editor.apply();
+        this.options.edit().putBoolean(Constants.PREFERENCES_OPTIONS_NINJAR, check).apply();
     }
 
     private void skinViolet(boolean check){
-        MainActivity.editor.putBoolean("violet", check);
-        MainActivity.editor.apply();
-    }
-
-    public static int skinChecked(){
-        if (skinB.isChecked()){
-            return R.drawable.ninjablanc_left;
-        }
-        else if (skinR.isChecked()){
-            return R.drawable.ninjarouge_left;
-        }
-        else return R.drawable.ninjaviolet_left;
-    }
-
-    public static int skinCheckedReverse(){
-        Log.d("test", "2");
-        if (skinB.isChecked()){
-            return R.drawable.ninjablanc_right;
-        }
-        else if (skinR.isChecked()){
-            return R.drawable.ninjarouge_right;
-        }
-        else return R.drawable.ninjaviolet_right;
-    }
-
-
-
-    public static boolean music(){
-        return musique.isChecked();
-    }
-
-    public static boolean hardmode(){
-        return difficulty.isChecked();
+        this.options.edit().putBoolean(Constants.PREFERENCES_OPTIONS_NINJAP, check).apply();
     }
 }

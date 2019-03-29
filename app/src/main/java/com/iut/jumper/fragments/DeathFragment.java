@@ -1,4 +1,6 @@
 package com.iut.jumper.fragments;
 
-public class DeathFragment {
+import android.support.v4.app.Fragment;
+
+public class DeathFragment extends Fragment {
 }

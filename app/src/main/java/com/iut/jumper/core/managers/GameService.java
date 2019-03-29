@@ -7,6 +7,7 @@ import android.view.Display;
 import com.iut.jumper.activities.GameActivity;
 import com.iut.jumper.core.managers.GameLoopManager.GameLoopService;
 import com.iut.jumper.interfaces.IService;
+import com.iut.jumper.models.Options;
 import com.iut.jumper.views.GameView;
 
 public class GameService implements IService {
@@ -29,7 +30,7 @@ public class GameService implements IService {
 
 
     // CREATE - INSTANTIATE elements
-    public GameService(Context context, Display display) {
+    public GameService(Context context, Display display, Options options) {
         Log.d("GAMEMANAGER", "create)");
 
         this.score = 0;
@@ -37,7 +38,7 @@ public class GameService implements IService {
         this.activity = (GameActivity)context;
 
         this.display = display;
-        this.instanceManager = new InstanceManager(this);
+        this.instanceManager = new InstanceManager(this, options.getNinja());
 
         this.difficultyManager = new DifficultyManager(this.instanceManager.getJumper().getJumpHeight());
 
@@ -45,7 +46,7 @@ public class GameService implements IService {
 
         this.sensorService = new SensorService(context, this);
 
-        this.soundManager = new SoundManager(context, true);
+        this.soundManager = new SoundManager(context, options.isMusic());
         this.soundManager.playMusic();
     }
 

@@ -1,6 +1,8 @@
 package com.iut.jumper.activities;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
@@ -10,26 +12,25 @@ import android.widget.TextView;
 
 import com.iut.jumper.R;
 import com.iut.jumper.core.managers.GameService;
+import com.iut.jumper.models.Options;
+import com.iut.jumper.utils.Constants;
 import com.iut.jumper.views.GameView;
 
 public class GameActivity extends AActivity {
 
     private GameService gameService;
     private boolean paused;
-    private boolean music;
-    private boolean hardmode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d("JUMPER-Play", "onCreate");
 
-        //music = OptionsActivity.music();
-        //hardmode = OptionsActivity.hardmode();
+        Options options = new Options(getApplicationContext().getSharedPreferences(Constants.PREFERENCES_OPTIONS, 0));
 
         Display display = getWindowManager().getDefaultDisplay();
 
-        this.gameService = new GameService(this, display);
+        this.gameService = new GameService(this, display, options);
 
         setContentView(R.layout.activity_game);
 
