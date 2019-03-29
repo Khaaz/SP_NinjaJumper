@@ -14,7 +14,7 @@
         android:background="@color/colorPrimaryDark"
         android:text="@string/options"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        app:layout_constraintBottom_toTopOf="@+id/musique"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,40 +27,31 @@
         android:id="@+id/musique"
         android:layout_width="127dp"
         android:layout_height="36dp"
+        android:layout_marginBottom="8dp"
         android:background="@color/colorPrimaryDark"
         android:button="@color/colorAccent"
         android:text="@string/music"
         android:textAppearance="@style/TextAppearance.AppCompat.Button"
-        app:layout_constraintBottom_toTopOf="@+id/difficulty"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-    <Switch
-        android:id="@+id/difficulty"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
-        android:text="@string/hardmode"
-        android:textAppearance="@style/TextAppearance.AppCompat.Button"
-        app:layout_constraintBottom_toTopOf="@+id/skin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/musique" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.18" />
 
     <RadioGroup
         android:id="@+id/skin"
         android:layout_width="118dp"
         android:layout_height="172dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@color/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/radioGroup2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/difficulty">
+        app:layout_constraintTop_toBottomOf="@+id/musique">
 
         <RadioButton
             android:id="@+id/skinblanc"

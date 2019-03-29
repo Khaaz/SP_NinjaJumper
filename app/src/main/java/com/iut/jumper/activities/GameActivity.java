@@ -5,11 +5,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.iut.jumper.MainActivity;
 import com.iut.jumper.R;
 import com.iut.jumper.core.managers.GameService;
 import com.iut.jumper.views.GameView;
