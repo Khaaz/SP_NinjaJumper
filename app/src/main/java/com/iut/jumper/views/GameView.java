@@ -27,8 +27,6 @@ public class GameView extends View {
 
     private static final Object sFrameLock = new Object();
 
-    private int score;
-
     public GameView(Context context) {
         super(context);
     }
@@ -38,8 +36,6 @@ public class GameView extends View {
         super(context, attrs);
 
         this.instanceManager = ((GameActivity)context).getGameService().getInstanceManager();
-
-        this.score = ((GameActivity)context).getGameService().getScore();
 
         // Create jumper bitmaps
         this.createJumperBitmaps(this.instanceManager.getJumper());

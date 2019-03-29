@@ -26,7 +26,9 @@ public class SensorService implements SensorEventListener {
      public SensorService(Context context, GameService gameService) {
          this.gameService = gameService;
 
-         this.screenOrientation = ((WindowManager)context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRotation();
+         this.screenOrientation = this.gameService.getDisplay().getRotation();
+
+         this.gameService.getDisplay().getRotation();
 
          sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
          sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -73,7 +75,7 @@ public class SensorService implements SensorEventListener {
 
     // https://stackoverflow.com/questions/5877780/orientation-from-android-accelerometer/15552017
     // http://developer.download.nvidia.com/tegra/docs/tegra_android_accelerometer_v5f.pdf
-    public float[] adjustAccelOrientation(int displayRotation, float[] eventValues) {
+    private float[] adjustAccelOrientation(int displayRotation, float[] eventValues) {
         float[] adjustedValues = new float[3];
 
         final int axisSwap[][] = {
