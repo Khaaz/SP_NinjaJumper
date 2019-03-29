@@ -1,3 +1,27 @@
 <resources>
     <string name="app_name">Jumper</string>
+    <string name="playButton">Play</string>
+    <string name="scoreButton">Score</string>
+    <string name="scores">Scores</string>
+    <string name="PlayView">PlayView</string>
+    <string name="options">Options</string>
+    <string name="music">Musique : </string>
+    <string name="hardmode">Mode difficile : </string>
+    <string name="blanc">Skin Blanc</string>
+    <string name="rouge">Skin Rouge</string>
+    <string name="violet">Skin Violet</string>
+
+    <string name="resumeButton">Resume</string>
+    <string name="pauseButton">Pause</string>
+
+    <string name="score">0</string>
+
+    <string name="score_title">Vous avez perdus</string>
+    <string name="score_pseudo">Entrez votre pseudo : </string>
+    <string name="score_pseudo2">Nom</string>
+
+    <string name="score_score">Votre score :</string>
+    <string name="score_score2">Score</string>
+
+    <string name="score_replay">Rejouer</string>
 </resources>
