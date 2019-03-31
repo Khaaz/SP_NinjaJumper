@@ -1,63 +1,25 @@
 package com.iut.jumper.models;
 
-import android.support.annotation.NonNull;
+public class Score {
 
-import java.io.Serializable;
+    private int score;
+    private String user;
 
-public class Score implements Comparable<Score> {
+    public Score() {
 
-    private String username;
-    private Integer score;
+    }
 
-    private boolean active;
-
-    public Score(String username, Integer score, boolean active) {
-        this.username = username;
+    public Score(int score, String user) {
         this.score = score;
-        this.active = active;
+        this.user = user;
     }
 
-    public Score(String username, Integer score) {
-        this.username = username;
-        this.score = score;
-        this.active = true;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public Integer getScore() {
+    public int getScore() {
         return score;
-    }
-
-    public void setScore(Integer score) {
-        this.score = score;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
     }
 
     @Override
     public String toString() {
-        return "Pseudo : " + username + "\nScore   : " + score;
+        return this.user + " : " + String.valueOf(this.score);
     }
-
-    public String toString2() { return username + ";" + score; }
-
-    @Override
-    public int compareTo(@NonNull Score s) {
-        return (this.score - s.score);
-    }
-
-
 }

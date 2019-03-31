@@ -12,6 +12,7 @@ import com.iut.jumper.activities.AActivity;
 import com.iut.jumper.activities.GameActivity;
 import com.iut.jumper.activities.OptionsActivity;
 import com.iut.jumper.activities.ScoreActivity;
+import com.iut.jumper.core.ScoreManager;
 
 public class MainActivity extends AActivity {
 
@@ -20,7 +21,12 @@ public class MainActivity extends AActivity {
         super.onCreate(savedInstanceState);
         Log.d("JUMPER", "onCreate");
 
+        this.initScoreManager();
         setContentView(R.layout.activity_main);
+    }
+
+    private void initScoreManager() {
+        ScoreManager.setJsonStoragePath(this.getFilesDir().getPath());
     }
 
     public void openScore(View view) {

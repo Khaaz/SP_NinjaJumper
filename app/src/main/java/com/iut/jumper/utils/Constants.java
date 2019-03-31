@@ -41,6 +41,7 @@ public class Constants {
     public static final double SCALE_PLATEFORM_WIDTH = 0.15;
 
     public static final String PREFERENCES_OPTIONS = "Options";
+    public static final String PREFERENCES_OPTIONS_NAME = "name";
     public static final String PREFERENCES_OPTIONS_MUSIC = "music";
     public static final String PREFERENCES_OPTIONS_NINJAW = "ninja_white";
     public static final String PREFERENCES_OPTIONS_NINJAP = "ninja_purple";
