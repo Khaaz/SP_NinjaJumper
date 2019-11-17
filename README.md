@@ -1,3 +1,4 @@
 # Jumper
 
-Penser a aller voir la lib android avec l'animation de ressort pour le perso
+School project.
+Android game. Basically a doodle jump.
