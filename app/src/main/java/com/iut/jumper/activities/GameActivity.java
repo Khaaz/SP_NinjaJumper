@@ -44,6 +44,7 @@ public class GameActivity extends AActivity {
 
     public void showMenu() {
         Intent intent = new Intent(this, DeathActivity.class);
+        intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
         intent.putExtra("Score", this.gameService.getScore());
         startActivity(intent);
     }

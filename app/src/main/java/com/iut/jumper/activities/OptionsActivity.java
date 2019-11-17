@@ -29,11 +29,11 @@ public class OptionsActivity extends AActivity{
         RadioButton skinR = (RadioButton)findViewById(R.id.skinrouge);
 
 
-        musique.setChecked(options.getBoolean(Constants.PREFERENCES_OPTIONS_MUSIC, true));
+        musique.setChecked(this.options.getBoolean(Constants.PREFERENCES_OPTIONS_MUSIC, true));
 
-        skinB.setChecked(options.getBoolean(Constants.PREFERENCES_OPTIONS_NINJAW, true));
-        skinR.setChecked(options.getBoolean(Constants.PREFERENCES_OPTIONS_NINJAR, false));
-        skinV.setChecked(options.getBoolean(Constants.PREFERENCES_OPTIONS_NINJAP, false));
+        skinB.setChecked(this.options.getBoolean(Constants.PREFERENCES_OPTIONS_NINJAW, true));
+        skinR.setChecked(this.options.getBoolean(Constants.PREFERENCES_OPTIONS_NINJAR, false));
+        skinV.setChecked(this.options.getBoolean(Constants.PREFERENCES_OPTIONS_NINJAP, false));
 
         musique.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

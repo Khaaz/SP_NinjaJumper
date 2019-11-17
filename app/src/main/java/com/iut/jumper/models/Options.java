@@ -22,11 +22,11 @@ public class Options {
         this.ninjaR = preferences.getBoolean(Constants.PREFERENCES_OPTIONS_NINJAR, false);
 
         if (this.ninjaR) {
-            this.ninja = R.drawable.ninjarouge_right;
+            this.ninja = R.drawable.redninja_right;
         } else if (this.ninjaP) {
-            this.ninja = R.drawable.ninjaviolet_right;
+            this.ninja = R.drawable.purpleninja_right;
         } else {
-            this.ninja = R.drawable.ninjablanc_right;
+            this.ninja = R.drawable.whiteninja_right;
         }
     }
 

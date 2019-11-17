@@ -52,7 +52,10 @@ public class DifficultyManager {
             int oneJumpStep = score - (score % Constants.STEP_ONE_JUMP);
             if (oneJumpStep > this.oneJumpStep) {
                 this.oneJumpStep = oneJumpStep;
-                this.oneJumpProbability -= 1;
+                this.oneJumpProbability -= Constants.ONE_JUMP_DECREASE;
+                if (this.oneJumpProbability < 1) {
+                    this.oneJumpProbability = 1;
+                }
             }
         }
 

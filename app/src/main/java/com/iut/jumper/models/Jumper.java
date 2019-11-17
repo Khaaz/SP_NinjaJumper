@@ -66,16 +66,16 @@ public class Jumper extends AEntity {
     }
 
     private int pickReversedSkin(int skin) {
-        if (skin == R.drawable.ninjablanc_right) {
-            return R.drawable.ninjablanc_left;
+        if (skin == R.drawable.whiteninja_right) {
+            return R.drawable.whiteninja_left;
         }
-        if (skin == R.drawable.ninjarouge_right) {
-            return R.drawable.ninjarouge_left;
+        if (skin == R.drawable.redninja_right) {
+            return R.drawable.redninja_left;
         }
-        if (skin == R.drawable.ninjaviolet_right) {
-            return R.drawable.ninjaviolet_left;
+        if (skin == R.drawable.purpleninja_right) {
+            return R.drawable.purpleninja_left;
         }
         // default
-        return R.drawable.ninjablanc_left;
+        return R.drawable.whiteninja_left;
     }
 }

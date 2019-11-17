@@ -58,21 +58,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/blanc" />
+            android:text="@string/white" />
 
         <RadioButton
             android:id="@+id/skinviolet"
             android:layout_width="match_parent"
             android:layout_height="59dp"
             android:layout_weight="1"
-            android:text="@string/violet" />
+            android:text="@string/purple" />
 
         <RadioButton
             android:id="@+id/skinrouge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/rouge" />
+            android:text="@string/red" />
 
     </RadioGroup>
 
@@ -93,7 +93,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:contentDescription="skinBase"
-            app:srcCompat="@drawable/ninjablanc_left" />
+            app:srcCompat="@drawable/whiteninja_left" />
 
         <ImageView
             android:id="@+id/imageView3"
@@ -101,7 +101,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:contentDescription="skinMomie"
-            app:srcCompat="@drawable/ninjaviolet_left" />
+            app:srcCompat="@drawable/purpleninja_left" />
 
         <ImageView
             android:id="@+id/imageView4"
@@ -109,7 +109,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:contentDescription="skinNoel"
-            app:srcCompat="@drawable/ninjarouge_left" />
+            app:srcCompat="@drawable/redninja_left" />
     </RadioGroup>
 
 </android.support.constraint.ConstraintLayout>
